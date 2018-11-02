@@ -236,14 +236,28 @@ bool ofxOscReceiver::getParameter(ofAbstractParameter & parameter){
 //            cout<<p->getName()<<endl;
 			if(address[i]==p->getName()){
 				if(p->type()==typeid(ofParameterGroup).name()){
-					if(address.size()>=i+1){
+					if(address.size()>i+1){
                         if(static_cast<ofParameterGroup*>(p)->contains(address[i+1]))
                             { p = &static_cast<ofParameterGroup*>(p)->get(address[i+1]);}
                         else 
-                            {cout<<"wrong oscmessage"<<endl;
+                            {cout<<"wrong oscmessage";
+                                for(auto & a:address){
+                                    cout<<" " << a;
+                                }
+                                cout << endl;
                             return false;} 
 					}
 				}
+                else if(p->type()==typeid(ofParameter<ofVec4f>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT ){
+                    if(msg.getNumArgs()!=4){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
+                    else{
+                        ofVec4f vt;
+                        for(int i  = 0 ; i < 4 ; i++){
+                            vt[i] = msg.getArgAsFloat(i);
+                        }
+                        (p->cast<ofVec4f>())=vt;
+                    }
+                }
                 else if(p->type()==typeid(ofParameter<ofVec3f>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT ){
                     if(msg.getNumArgs()!=3){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
                     else{

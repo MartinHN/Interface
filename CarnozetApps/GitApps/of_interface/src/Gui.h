@@ -22,7 +22,7 @@ public:
     ~Gui(){};
 //    Gui(ofParameterGroup * p);
 
-    void draw();
+    void draw(int w, int h);
     void load(ofParameterGroup & pg);
 
 

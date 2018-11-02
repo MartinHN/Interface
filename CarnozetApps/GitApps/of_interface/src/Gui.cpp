@@ -78,7 +78,7 @@ void Gui::load(ofParameterGroup & pgtmp){
 }
 
 
-void Gui::draw(){
+void Gui::draw(int w, int h){
     
     if(visuSettings==0){
     for(std::list<ofxPanel*>::iterator ggg = guiParam.begin() ; ggg!=guiParam.end();++ggg){
@@ -96,4 +96,10 @@ void Gui::draw(){
         }
 
     }
+    else if(visuSettings == 3){
+        ofSetColor(0);
+        ofRect(0,0,w,h);
+
+    }
+    
 }

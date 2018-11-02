@@ -61,5 +61,6 @@ class AttrCtl{
     ofParameter<int> attrmirrory;
     ofParameter<int> attrmirrorz;
     ofParameter<bool> isAttr,invx,invy;
+    ofParameter<ofVec4f> customPoint;
 
 };

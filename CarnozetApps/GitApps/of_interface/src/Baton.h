@@ -21,8 +21,8 @@ public:
     
     //Herited method
     void setup();
-    void update(VisuHandler * dad);
-    void draw(VisuHandler * dad);
+    void update(int w, int h) override;
+    void draw(int w, int h)override;
 
     
     

@@ -42,7 +42,7 @@ public:
     
     ofParameter<float> rayon,alpha,theta,rIn;
     ofParameter<int> curFamilly,mode;
-    ofParameter<ofVec4f> color;
+    ofParameter<ofVec3f> color;
     vector<ofVec3f>  dpoints;
     vector<Meta>  points;
     ofParameter<float> lifeTime,emitrate,noise,noiseR,angle,mass,f;

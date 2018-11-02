@@ -165,6 +165,7 @@ const void VisuHandler::draw(int mode){
         
         
         if(isOk){
+            visuList[i]->isDrawingPipe = mode==1;
             int validScreen = sH->getValidScreen(visuList[i]->screenN);
             if(validScreen>=0){
                 if(mode!=2)ofEnableAlphaBlending();
@@ -226,7 +227,7 @@ const void VisuHandler::draw(int mode){
         ofPopStyle();
         ofPopView();
         ofPopMatrix();
-        
+        visuList[i]->isDrawingPipe = false;
         
     }
     

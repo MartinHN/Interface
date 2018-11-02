@@ -80,7 +80,7 @@ public:
     
     VisuHandler *dad;
     ofParameterGroup settings;
-    bool isHighFPS;
+    bool isHighFPS,isDrawingPipe;
     ofReadOnlyParameter<int, int> beat;
     
     

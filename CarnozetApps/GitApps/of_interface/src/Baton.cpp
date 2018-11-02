@@ -39,7 +39,7 @@ void Baton::setup(){
     MYPARAM(alpha,100,0,200);
     MYPARAM(mode,0,0,4);
     MYPARAM(thickness,20,0,300);
-    MYPARAM(velocity,ofVec3f(1,0,0),ofVec3f(-INFINITY),ofVec3f(+INFINITY));
+    MYPARAM(velocity,ofVec3f(1,0,0),ofVec3f(-999),ofVec3f(+999));
     MYPARAM(maxsize,20,0,100);
 //    settings.add(thickness=ofParameter<int>("thickness",100));
 //    settings.add(mode=ofParameter<int>("mode",1));
@@ -76,7 +76,7 @@ Baton::Baton(VisuHandler * dad):VisuClass(dad){
 }
 
 
-void Baton::update(VisuHandler * dad){
+void Baton::update(int w, int h){
     attr=&dad->attr->destA;
     ofVec2f size =    dad->sH->sizeOfScreen(screenN);
     ofVec3f center = size/2;
@@ -161,7 +161,7 @@ void Baton::update(VisuHandler * dad){
 }
 
 
-void Baton::draw(VisuHandler * dad){
+void Baton::draw(int w, int h){
     
     
     ofPushStyle();

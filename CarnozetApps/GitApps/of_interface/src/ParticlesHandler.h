@@ -101,8 +101,8 @@ public:
     
     
     ofParameter<float>      particleSize;
-    ofParameter<float>      alphaparticle;
-    ofParameter<ofVec3f>    partcolor;
+    ofParameter<int>      alphaColor;
+    ofParameter<ofVec3f>    color;
     ofParameter<int>        gradtype;
     ofParameter<float>      mingrad;
     ofParameter<float>      maxgrad;
@@ -114,6 +114,7 @@ public:
     
     
     int textureRes;
+    ofVbo partVbo;
     ofVec2f  textureRes2;
     int textureRes3;
     

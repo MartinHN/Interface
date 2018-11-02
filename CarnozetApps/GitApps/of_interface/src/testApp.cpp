@@ -50,13 +50,15 @@ void testApp::setup(){
     
     
     
-    receiver.setup(12345);
+
     
     blurX.load("","shaders/blurX.frag");
     blurY.load("","shaders/blurY.frag");
     colorMod.load("","shaders/colorMod.frag");
     bloom.load("","shaders/bloom.frag");
     gloom.load("","shaders/gloom.frag");
+    invertColorShader.load("","shaders/invertColor.frag");
+    kaleidoscope.load("","shaders/kaleidoscope.frag");
     
     finalRender.allocate(scrw,scrh,GL_RGB);
     
@@ -106,7 +108,9 @@ void testApp::setup(){
     saveName.setSerializable(false);
     saveName.addListener(this, &testApp::saveState);
     loadName.addListener(this, &testApp::loadState);
-    
+//#ifdef GUIMODE
+//    MYPARAM(GUIRate, 5, 1, 10);
+//#endif
     MYPARAM(finalblur, 0.f, 0.f, 10.f);
     MYPARAM(saturation, 1.f, 0.f, 2.f);
     MYPARAM(contrast, 1.f, 0.f, 2.f);
@@ -119,6 +123,12 @@ void testApp::setup(){
     MYPARAM(alphablur, 255, 0, 255);
     MYPARAM(bloomsize,0,0,10);
     MYPARAM(isGloom,false,false,true);
+    MYPARAM(invertColor,false,false,true);
+    MYPARAM(isKaleidoscope,false,false,true);
+    MYPARAM(kaleidoscopeScaleX,0.1,0.1,1);
+    MYPARAM(kaleidoscopeScaleY,0.1,0.1,1);
+    MYPARAM(kaleidoscopeBlend,0,0,1);
+    MYPARAM(kaleidoscopeAngle,0,0,6);
     MYPARAM(isPipe,false,false,true);
     MYPARAM(pipeblur, 0.f,0.f,25.f);
     MYPARAM(pipeAlphablur, 255,0,255);
@@ -135,19 +145,21 @@ void testApp::setup(){
     
     visuHandler.addVisu(new background(&visuHandler));
     
-    /*visuHandler.addVisu(new Particles(&visuHandler));
+    visuHandler.addVisu(new Particles(&visuHandler));
     visuHandler.addVisu(new metaBalls(&visuHandler));
     visuHandler.addVisu(new AutoTree(&visuHandler));
     
-    visuHandler.addVisu(new BallManager(&visuHandler));
+//    visuHandler.addVisu(new BallManager(&visuHandler));
     visuHandler.addVisu(new drawBlob(&visuHandler));
     
-    visuHandler.addVisu(new VideoPlayer(&visuHandler));
-    visuHandler.addVisu(new boule2gomme(&visuHandler));
-    visuHandler.addVisu(new Photo(&visuHandler));
+    //visuHandler.addVisu(new VideoPlayer(&visuHandler));
+
+//    visuHandler.addVisu(new Photo(&visuHandler));
     visuHandler.addVisu(new ColorRuban(&visuHandler));
-    visuHandler.addVisu(new Liner(&visuHandler));*/
-    
+    visuHandler.addVisu(new Liner(&visuHandler));
+//    visuHandler.addVisu(new Baton(&visuHandler));
+
+    visuHandler.addVisu(new boule2gomme(&visuHandler));
     
     
     visuHandler.registerParams();
@@ -169,19 +181,26 @@ void testApp::setup(){
     
     
 #ifdef GUIMODE
+    liveMode = false;
     paramSync.setup(globalParam,VISU_OSC_IN,VISU_OSC_IP_OUT,VISU_OSC_OUT);
+    paramSync2 = NULL;
+    clientServerReceiver = new ofxOscReceiver();
+    clientServerReceiver->setup(SERVER_PORT);
 
 #else
     visuHandler.setupData();
     bH.setupData(&blurX,&blurY);
     sH.setupData();
     paramSync.setup(globalParam,VISU_OSC_OUT,"localhost",VISU_OSC_IN);
+
     
 #endif
     
 #ifdef GUIMODE
-    ofSetFrameRate(12);
+//    ofSetFrameRate(60);
+//    GUIFBO.allocate(scrw,scrh,GL_RGB);
 
+    ofSetFrameRate(30);
     gui.load(globalParam);
     
     
@@ -202,9 +221,15 @@ void testApp::setup(){
 
 void testApp::update(){
     
-    paramSync.update();
-    
+
+
+#ifdef GUIMODE
+    clientServerUpdate();
+
+#endif
+        paramSync.update();
 #ifndef GUIMODE
+
     bH.update();
     
     
@@ -226,10 +251,10 @@ void testApp::update(){
     
     
     
-    oscUpdate();
+
     
     
-    
+
     
 #endif 
     
@@ -250,8 +275,26 @@ void testApp::draw(){
     
 #ifdef GUIMODE
     ofSetBackgroundAuto(true);
-    gui.draw();
-    
+//    if(ofGetFrameNum()%GUIRate==0 || ofGetMousePressed()){
+//        ofDisableAlphaBlending();
+//        GUIFBO.begin();
+//        glBlendEquation(GL_ADD);
+//        glBlendFunc(GL_DST_COLOR,GL_ZERO);
+//        ofSetColor(80,80,80,255);
+//        ofRect(0,0,scrw,scrh);
+//        ofSetColor(255);
+//        gui.draw();
+//        GUIFBO.end();
+//    }
+//    GUIFBO.draw(0,0,scrw,scrh);
+    if(!liveMode){
+        gui.draw(scrw,scrh);
+    }
+    else{
+        ofSetColor(0);
+        ofRect(0,0,scrw,scrh);
+    }
+
 #else
     
     
@@ -407,7 +450,30 @@ void testApp::draw(){
         finalRender.swap();
         
     }
-    
+    if(isKaleidoscope){
+        finalRender.dst->begin();
+        kaleidoscope.begin();
+        kaleidoscope.setUniform2f("resolution",scrw,scrh);
+        kaleidoscope.setUniform1f("angle",kaleidoscopeAngle);
+        kaleidoscope.setUniform1f("scaleX",kaleidoscopeScaleX);
+        kaleidoscope.setUniform1f("scaleY",kaleidoscopeScaleY);
+        kaleidoscope.setUniform1f("blend",kaleidoscopeBlend);
+        finalRender.src->draw(0,0);
+        kaleidoscope.end();
+        finalRender.dst->end();
+
+        finalRender.swap();
+
+    }
+    if(invertColor){
+        finalRender.dst->begin();
+        invertColorShader.begin();
+        finalRender.src->draw(0,0);
+        invertColorShader.end();
+        finalRender.dst->end();
+
+        finalRender.swap();
+    }
     
     
     ofSetColor(255);
@@ -440,10 +506,16 @@ void testApp::draw(){
         if(!sH.invertMask)ofSetColor(0);
         else ofSetColor(255);
         ofRect(0, 0, scrw, scrh);
+
+
+        if(pipeMask){
+            if(sH.invertMask)invertColorShader.begin();
+            visuHandler.pipePP.src->draw(0,0,scrw,scrh);
+            if(sH.invertMask)invertColorShader.end();
+        }
+
         if(!sH.invertMask)ofSetColor(255);
         else ofSetColor(0);
-
-        if(pipeMask)visuHandler.pipePP.src->draw(0,0,scrw,scrh);
         visuHandler.draw(2);  
         
         sH.drawMask();
@@ -459,10 +531,14 @@ void testApp::draw(){
     ofSetColor(255);
     finalRender.src->draw(0,0,scrw,scrh);
     ofSetColor(0);
-    ofRect(0,0,cropScreen->x*scrw,scrh);
-    ofRect(0,0,scrw,cropScreen->y*scrh);
-    ofRect(scrw*(1-cropScreen->z),0,scrw*cropScreen->z,scrh);
-    ofRect(0,scrh*(1-cropScreen->w),scrw,scrh*cropScreen->w);
+    if(cropScreen->x)
+        ofRect(0,0,cropScreen->x*scrw,scrh);
+    if(cropScreen->y)
+        ofRect(0,0,scrw,cropScreen->y*scrh);
+    if(cropScreen->z)
+        ofRect(scrw*(1-cropScreen->z),0,scrw*cropScreen->z,scrh);
+    if(cropScreen->w)
+        ofRect(0,scrh*(1-cropScreen->w),scrw,scrh*cropScreen->w);
     
     
     if(isFPS){
@@ -499,6 +575,9 @@ void testApp::keyPressed(int key){
         case'v':
             gui.visuSettings++;
             gui.visuSettings %=3 ;
+            break;
+        case 'o':
+            liveMode = !liveMode;
             break;
             
     }
@@ -570,31 +649,7 @@ void testApp::keyPressed(int key){
 
 
 
-//--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
-#ifndef syphonout
-    scrw=width=w;
-    scrh=height=h;
-    
-    
-    
-    visuHandler.updateScreenSize();
-    finalRender.allocate(width,height,GL_RGB);
-    camera2.updateScreenSize(w, h);
-#endif
-}
 
-
-
-void testApp::oscUpdate(){
-    ofxOscMessage m;
-    while(receiver.getNextMessage(&m)){
-
-        
-
-    }
-    
-}
 
 
 
@@ -633,9 +688,71 @@ void testApp::mouseReleased(int x, int y, int button){
     
 }
 
+#endif // ndef GUIMODE
+
+
+//--------------------------------------------------------------
+void testApp::windowResized(int w, int h){
+#ifdef GUIMODE
+    scrw=w;
+    scrh=h;
+//    GUIFBO.allocate(scrw,scrh,GL_RGB);
+#else
+#ifndef syphonout
+    scrw=width = w;
+    scrh=height=h;
+
+
+
+
+
+    visuHandler.updateScreenSize();
+    finalRender.allocate(width,height,GL_RGB);
+    camera2.updateScreenSize(w, h);
 #endif
+#endif
+}
 
 
+#ifdef GUIMODE
+void testApp::clientServerUpdate(){
+    ofxOscMessage m;
+    //    /// return the address
+    //    string getAddress() const { return address; }
+    //
+    //    /// return the remote ip
+    //    string getRemoteIp() const { return remote_host; }
+    //    /// return the remote port
+    //    int getRemotePort() const { return remote_port; }
+    if(clientServerReceiver){
+    while(clientServerReceiver->getNextMessage(&m)){
+        if(m.getAddress() == "/addMe"){
+            auto ip = m.getRemoteIp();
+            auto port = m.getRemotePort();
+
+            ofLog() << ip +":"+ofToString(port);
+            if(!paramSync2){
+                paramSync2 = new ofxOscParameterSync();
+                delete clientServerReceiver;
+                clientServerReceiver = NULL;
+                paramSync2->setup(globalParam,SERVER_PORT,ip,port);
+                break;
+
+            }
+            //            for(auto &a:m.getArgs()){
+            //            port = port;
+            //            }
+        }
+        
+        
+    }
+    }
+    if(paramSync2){
+    paramSync2->update();
+    }
+    
+}
+#endif
 
 
 void testApp::saveState(string & s){

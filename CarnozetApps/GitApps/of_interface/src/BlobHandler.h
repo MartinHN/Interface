@@ -14,7 +14,7 @@
 #include "Constants.h"
 #include "ofMain.h"
 
-
+#define USE_ONE_CHANNEL 1
 class BlobHandler{
     
 public:
@@ -28,6 +28,8 @@ public:
 //    void computePoly();
     void update();
 //    void blurblob();
+    void getSyphonTex();
+    void getGS();
     void compBlob();
     void registerParams();
     void compCache();
@@ -49,7 +51,9 @@ public:
     
     
     ofxSyphonClient blobClient;
+
     ofFbo syphonTex;
+
 
     ScreenHandler * sH;
     ofShader * blurX;
@@ -59,6 +63,7 @@ public:
     ofPixels pix;
 
     ofxCvGrayscaleImage gs;
+    ofxCvColorImage colorIm;
     
     
     vector<ofPolyline> cachedP,lcacheP;
@@ -70,7 +75,7 @@ public:
 
     ofParameter<float> vidThreshold;
     ofParameterGroup settings;
-    ofParameter<float> minSide, maxSide,maxLengthExtrem;
+    ofParameter<float> minSide, maxSide,maxLengthExtrem,maxArmWidth;
     ofParameter<int> maxBlobs,polyMaxPoints;
     ofParameter<bool> findHoles,invertBW,invertX,invertY;
     ofParameter<float> simplification,smooth;

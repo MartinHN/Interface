@@ -20,6 +20,19 @@ AttrCtl::AttrCtl(){
 }
 
 void AttrCtl::update(){
+    if(!ofGetMousePressed()){
+    vector<ofPoint> customPoints;
+    customPoints.push_back(ofPoint(customPoint.get().x,customPoint.get().y));
+    customPoints.push_back(ofPoint(customPoint.get().z,customPoint.get().w));
+
+    vector<ofPoint> cpts;
+    for(auto & p : customPoints){
+        if(!(p.x==0 && p.y==0)){cpts.push_back(p);}
+    }
+
+    addPoints(cpts,0);
+    }
+
     smooth();
     staticpoints();
     timedPoints();
@@ -38,6 +51,7 @@ void AttrCtl::registerParam(){
     MYPARAM(zonefamilly1,ofVec4f(0,0,1,1),ofVec4f(0),ofVec4f(1));
     MYPARAM(zonefamilly2,ofVec4f(0,0,1,1),ofVec4f(0),ofVec4f(1));
     MYPARAM(zonefamilly3,ofVec4f(0,0,1,1),ofVec4f(0),ofVec4f(1));
+    MYPARAM(customPoint,ofVec4f(0),ofVec4f(0),ofVec4f(1));
 }
 
 
@@ -52,7 +66,7 @@ void AttrCtl::clearPoints(){
     destA.clear();
 }
 void AttrCtl::addPoints(vector<ofPoint> curcentroids,int type){
-    
+
 
     if(destA.size()>0){
         std::vector<AttrStruct>::iterator g = destA.begin();
@@ -71,23 +85,23 @@ void AttrCtl::addPoints(vector<ofPoint> curcentroids,int type){
                 p.zone=k+1;
                 break;
             }
-            
+
         }
         destA.push_back(p);
-                
+
     }
 
 
-    
+
 }
 
 vector<ofPoint> AttrCtl::getAll(){
     vector<ofPoint> res;
     if(isAttr){
-    for(int i = 0 ; i< destA.size() ; i++){
-        res.push_back(destA[i].p);
-        
-    }
+        for(int i = 0 ; i< destA.size() ; i++){
+            res.push_back(destA[i].p);
+
+        }
     }
     return res;
 }
@@ -95,38 +109,38 @@ vector<ofPoint> AttrCtl::getAll(){
 vector<ofPoint> AttrCtl::getType(int f,float w, float h,int z){
     vector<ofPoint> res;
     vector<int> targetf;
-    
-    if(isAttr){
-    
-    if(f<0){
-     return res;
-    }
-    
-    int curf = f%10;
-    int k = 0;
-     do{
-         targetf.push_back(curf);
-     k++;
-    curf = f/(pow(10.,k));
 
-}while (f>10&&curf>0);
-//    if(map2blob)
-    for(int i = 0 ; i< destA.size() ; i++){
-        if(destA[i].type==f){
-            if(z==0 || zones[z-1].inside(destA[i].p)){
-                
-            res.push_back(destA[i].p);
-            if(invx)res.back().x = 1- res.back().x;
-            if(invy)res.back().y = 1- res.back().y;
-                
-                res.back()*=ofVec3f(w,h,1);
-            }
+    if(isAttr){
+
+        if(f<0){
+            return res;
         }
-        
+
+        int curf = f%10;
+        int k = 0;
+        do{
+            targetf.push_back(curf%10);
+            k++;
+            curf = f/(pow(10.,k));
+
+        }while (f>10&&curf>0);
+        //    if(map2blob)
+        for(int i = 0 ; i< destA.size() ; i++){
+            if(destA[i].type==f){
+                if(z==0 || zones[z-1].inside(destA[i].p)){
+
+                    res.push_back(destA[i].p);
+                    if(invx)res.back().x = 1- res.back().x;
+                    if(invy)res.back().y = 1- res.back().y;
+
+                    res.back()*=ofVec3f(w,h,1);
+                }
+            }
+
+        }
+
     }
-        
-    }
-    
+
 
     return res;
 }
@@ -134,13 +148,13 @@ vector<ofPoint> AttrCtl::getType(int f,float w, float h,int z){
 
 
 void AttrCtl::smooth(){
-    
+
     smoothedA.clear();
-    
-    
+
+
     for(int i=0;i<destA.size();i++){
-            smoothedA.push_back(destA[i]);
-        
+        smoothedA.push_back(destA[i]);
+
     }
 
 
@@ -164,19 +178,19 @@ void AttrCtl::staticpoints(){
         }
 
     }
-    
+
     mirrorFam = getActiveFromInt(attrmirrory);
-    
+
     for(int i=0;i<mirrorFam.size();i++){
         for(int j = 0 ; j< destA.size();j++){
             if(destA[j].type==mirrorFam[i])
                 staticA.push_back(AttrStruct(ofPoint(destA[j].p.x,1-destA[j].p.y,destA[j].p.z),destA[j].type,destA[j].zone));
         }
-        
+
     }
-    
+
     mirrorFam = getActiveFromInt(attrmirrorz);
-    
+
     for(int i=0;i<mirrorFam.size();i++){
         for(int j = 0 ; j< destA.size();j++){
             if(destA[j].type==mirrorFam[i])

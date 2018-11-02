@@ -25,7 +25,8 @@ public:
     ofParameter<int> type;
     ofParameter<float> scale;
     ofParameter<float> ratio;
-    ofParameter<ofVec4f> color;
+    ofParameter<ofVec3f> color;
+    ofParameter<int> alphaColor;
     ofParameter<bool> fill;
     ofParameter<int> followFam;
     ofParameter<float> alpha;

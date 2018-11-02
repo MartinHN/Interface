@@ -15,7 +15,8 @@ background::background(VisuHandler * v):VisuClass(v){
     MYPARAM(followFam,-1,0,3);
     MYPARAM(alpha,0.3f,0.f,1.f);
     MYPARAM(center, ofVec2f(0.5), ofVec2f(-1), ofVec2f(2));
-    MYPARAM(color, ofVec4f(255), ofVec4f(0), ofVec4f(255));
+    MYPARAM(color, ofVec3f(255), ofVec3f(0), ofVec3f(255));
+    MYPARAM(alphaColor,255,0,255);
     MYPARAM(scale, 1.f,0.f,5.f);
     MYPARAM(ratio, 1.f,0.f,5.f);
     
@@ -43,11 +44,11 @@ void background::draw(int w, int h){
     ofFill();
     ofRectangle rect;
     if(fill){
-        if(type>0)ofSetColor(bg.getColor(0,0)*ofColor(color.get().x,color.get().y,color.get().z,color.get().w));
-        else ofSetColor(color.get().x,color.get().y,color.get().z,color.get().w);
+        if(type>0)ofSetColor(bg.getColor(0,0)*ofColor(color.get().x,color.get().y,color.get().z,alphaColor));
+        else ofSetColor(color.get().x,color.get().y,color.get().z,alphaColor);
      ofRect(0,0,w,h);
     }
-    ofSetColor(color.get().x,color.get().y,color.get().z,color.get().w);
+    ofSetColor(color.get().x,color.get().y,color.get().z,alphaColor);
 if(followFam<0) rect.setFromCenter(center.get()*ofVec2f(w,h), w*scale, h*scale*ratio);
 else{vector<ofVec3f> cur = dad->attr->getType(followFam,w,h);
     if(cur.size()>0){

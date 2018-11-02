@@ -13,6 +13,8 @@
 
 #define VISU_OSC_IN 12344
 #define VISU_OSC_OUT 12346
+#define SERVER_PORT 12345
+
 
 #define VISU_OSC_IP_OUT "localhost"
 
@@ -92,7 +94,9 @@ public:
             FBOs[i].end();
         }
     }
-    
+    void draw(int x,int y){
+        dst->draw(x,y);
+    }
     ofFbo& operator[]( int n ){ return FBOs[n];}
     
     ofFbo   *src;       // Source       ->  Ping
@@ -125,7 +129,7 @@ class Timer{
 };
 
 
-static int computeRatio = 2;
+static int computeRatio = 1;
 
 static int FPS = 40;
 // screen size

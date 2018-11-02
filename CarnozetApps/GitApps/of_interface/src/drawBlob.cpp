@@ -46,17 +46,13 @@ void drawBlob::draw(int w, int h){
     ofPushMatrix();
     
     ofTranslate(w*(realPos.x-scale->x/2.),h*(realPos.y-scale->y/2.), (realPos.z-0.5)*dad->zdepth);
+    auto col =ofColor(color->x,color->y,color->z,alpha);
+    if(isDrawingPipe){
+        col.set(255,255,255,alpha); // draw white in pipe
+    }
     for(int i  = 0 ; i< paths.size();i++){
         ofPath pp =paths[i];
-        /* ************** Attention ************
-        TODO COCO
-         changement de derniere minute pour afficher 
-         la silhouette en noir sans changer
-         tout en laissant le silhouette en blanc
-         pour l'effet sur les particules a travers le pipe
-         
-        */
-        pp.setFillColor(ofColor(color->x,color->y,color->z,alpha));
+        pp.setFillColor(col);
         if(pp.getOutline().size()>0 && pp.getOutline()[0].size()>0)
             pp.draw();
     }

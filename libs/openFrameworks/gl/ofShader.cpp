@@ -746,7 +746,7 @@ GLint ofShader::getAttributeLocation(const string & name) {
 //--------------------------------------------------------------
 GLint ofShader::getUniformLocation(const string & name) {
 	GLint loc = -1;
-#ifdef TARGET_RASPBERRY_PI
+#if 1//TARGET_RASPBERRY_PI
 	// tig: caching uniform locations gives the RPi a 17% boost on average
 	map<string, GLint>::iterator it = uniformLocations.find(name);
 	if (it == uniformLocations.end()){

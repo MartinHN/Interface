@@ -113,7 +113,7 @@ void Particles::setup(){
 //        }
 //    }
 
-    partImg.loadImage("images/noms.png");
+    partImg.loadImage("photos/fire.jpg");
 
 #endif
 
@@ -132,8 +132,8 @@ void Particles::setup(){
     
     //Appearence
     MYPARAM(particleSize, 3.0f,0.f,30.f);
-    MYPARAM(alphaparticle,1.f,0.f,4.f);
-    MYPARAM(partcolor, ofVec3f(0,0,1.),ofVec3f(0.),ofVec3f(255.));
+    MYPARAM(alphaColor,255,0,255);
+    MYPARAM(color, ofVec3f(0,0,1.),ofVec3f(0.),ofVec3f(255.));
     MYPARAM(gradtype , 2,0,3);
     MYPARAM(gradNum,0,0,20);
     MYPARAM(mingrad,0.f,-1.f,1.f);
@@ -360,26 +360,28 @@ void Particles::draw(int w, int h){
     updateRender.setUniform1i("resolution", (int)textureRes); 
     updateRender.setUniform3f("screen", w, (float)h,(float)dad->zdepth);
 
-    updateRender.setUniform4f("colorpart",gradtype,partcolor.get()[0],partcolor.get()[1],partcolor.get()[2]);
+    updateRender.setUniform4f("colorpart",gradtype,color.get()[0],color.get()[1],color.get()[2]);
     updateRender.setUniform2f("gradbounds",(float)mingrad,(float)maxgrad);
 //    updateRender.setUniform3f("mouse",(float)(ofGetMouse().x),(float)(height-mouseY),(float)zdepth/2 + f.mousez);
-    updateRender.setUniform1f("alpha",alphaparticle);
+    updateRender.setUniform1f("alpha",alphaColor/255.0);
     
     
     
    
     
     glPointSize(particleSize);
-    glBegin( GL_POINTS ); 
-    for(int x = 0; x < textureRes; x++){
-        for(int y = 0; y < textureRes; y++){
-            
-            glVertex3d(x,y,0);
-            
-        }
-    }
+//    glBegin( GL_POINTS ); 
+//    for(int x = 0; x < textureRes; x++){
+//        for(int y = 0; y < textureRes; y++){
+//            
+//            glVertex3d(x,y,0);
+//            
+//        }
+//    }
+//    glEnd();
+    partVbo.draw(GL_POINTS,0,numParticles);
     
-    glEnd();
+
 
     
     
@@ -466,7 +468,20 @@ if(!noReset){
             posPingPong.dst->allocate(textureRes,textureRes,GL_RGB32F);
        
     }
-    
+    partVbo.clear();
+    partVbo.disableColors();
+    partVbo.disableNormals();
+    partVbo.disableTexCoords();
+    partVbo.disableIndices();
+    vector<ofVec3f> initPos (numParticles);
+    for(int x = 0 ; x < textureRes ; x++){
+        for(int y = 0 ; y < textureRes ; y++){
+            initPos[x*textureRes+y] = ofVec3f(x,y,0);
+        }
+    }
+    partVbo.setVertexData(&initPos[0],numParticles,GL_STATIC_DRAW);
+
+ 
 }
 
 

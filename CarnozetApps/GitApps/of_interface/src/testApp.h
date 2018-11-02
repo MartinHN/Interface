@@ -70,12 +70,12 @@ public:
    
      void keyPressed  (int key);
 
-
+    void windowResized(int w, int h);
 
 #ifndef GUIMODE
     
     void exit();    
-    void windowResized(int w, int h);
+
     void mouseDragged(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
 
@@ -100,9 +100,7 @@ public:
     bool iscam;
     bool isFPS;
 
-    //OSC
-    ofxOscReceiver receiver;
-    void oscUpdate();
+    
     
     //Camera
     ofVec4f camrot;
@@ -128,7 +126,7 @@ public:
     ofShader colorMod;
     ofShader bloom;
     ofShader gloom;    
-
+    ofShader invertColorShader,kaleidoscope;
     bool isFullScreen;
     
  
@@ -148,11 +146,11 @@ public:
     ofParameter<string> saveName;
     ofParameter<string> loadName;
 
-    ofParameter<bool> isGloom;
+    ofParameter<bool> isGloom,invertColor,isKaleidoscope;
     ofParameter<int> bloomsize,pipeAlphablur;
     
     ofParameter<bool> isPipe,hidePipe,pipeMask;
-    ofParameter<float> pipeblur;
+    ofParameter<float> pipeblur,kaleidoscopeScaleX,kaleidoscopeScaleY,kaleidoscopeBlend,kaleidoscopeAngle;
     ofParameter<ofVec4f> cropScreen;
 
     
@@ -166,7 +164,13 @@ public:
     AttrCtl attrctl;
     
     ofxOscParameterSync paramSync;
-    
+#ifdef GUIMODE
+    //OSC
+    ofxOscReceiver*  clientServerReceiver; // used for external controller feedback
+    void clientServerUpdate();
+    ofxOscParameterSync * paramSync2;
+#endif
+
     
     ofxOscParameterSync screenSync;
     ofParameterGroup screensParam;
@@ -179,6 +183,9 @@ public:
 #ifdef GUIMODE
     Gui gui;
     string lastpath;
+    bool liveMode;
+//    ofParameter<int> GUIRate ;
+//    ofFbo GUIFBO;
 #endif
     
 

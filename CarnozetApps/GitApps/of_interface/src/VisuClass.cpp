@@ -14,6 +14,7 @@
 VisuClass::VisuClass(VisuHandler * vh){
     
     dad=vh;
+    isDrawingPipe = false;
     MYPARAM(isActive,false,false,true);
     MYPARAM(isPiping,false,false,true);
     MYPARAM(screenN,0,0,234);
