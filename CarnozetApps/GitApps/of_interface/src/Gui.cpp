@@ -11,11 +11,30 @@
 #include "Gui.h"
 
 
+void Gui::unload(){
+    for(auto p:guiParam){
+        delete p;
+    }
+    guiParam.clear();
+    for(auto p:guiScreen){
+        delete p;
+    }
+    guiScreen.clear();
+    for(auto p:guiVisu){
+        delete p;
+    }
+    guiVisu.clear();
+}
 
 
-
-void Gui::load(ofParameterGroup & pgtmp){
-
+void Gui::load(ofParameterGroup & pgtmp,int targetW,int targetH){
+    baseC = 0;
+    if(targetW ==0){
+        targetW = ofGetWidth();
+    }
+    if(targetH ==0){
+        targetH = ofGetHeight();
+    }
     guiParam.push_back(new ofxPanel());
     guiParam.back()->setDefaultWidth(.98*PARAMW);
     guiParam.back()->setup(pgtmp.getGroup("global"),pgtmp.getGroup("global").getName(),(baseC)*PARAMW);
@@ -46,7 +65,7 @@ void Gui::load(ofParameterGroup & pgtmp){
     
     
     guiScreen.push_back(new ofxPanel());
-    guiScreen.back()->setDefaultWidth(ofGetWidth()-30);
+    guiScreen.back()->setDefaultWidth(targetW-30);
     guiScreen.back()->setup(pgtmp.getGroup("screens"),pgtmp.getGroup("screens").getName());
     
     guiScreen.back()->minimizeAll();
@@ -61,8 +80,8 @@ void Gui::load(ofParameterGroup & pgtmp){
     
     
     for (int i = 0 ; i< pgtmp2.size();i++){
-        int l =  ofGetHeight()/2*int((baseC)*PARAMW/(ofGetWidth()*(4.5/5)));
-        int c = PARAMW*((int)(baseC)%(int)(ofGetWidth()/PARAMW));
+        int l =  targetH/2*int((baseC)*PARAMW/(targetW*(4.5/5)));
+        int c = PARAMW*((int)(baseC)%(int)(targetW/PARAMW));
         
         ofAbstractParameter * p = &pgtmp2.get(i); 
         if(p->type()==typeid(ofParameterGroup).name()){

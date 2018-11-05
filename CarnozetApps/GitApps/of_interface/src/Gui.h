@@ -23,11 +23,11 @@ public:
 //    Gui(ofParameterGroup * p);
 
     void draw(int w, int h);
-    void load(ofParameterGroup & pg);
+    void load(ofParameterGroup & pg,int targetW=0,int targetH=0);
+    void unload();
 
-
-    ofxPanel glob;
-    ofParameterGroup globP;
+//    ofxPanel glob;
+//    ofParameterGroup globP;
     list<ofxPanel *> guiParam,guiVisu,guiScreen;
 
      int baseC ;

@@ -11,9 +11,12 @@
 
 //#define LIVEBLUR
 
-#define VISU_OSC_IN 12344
+#define VISU_OSC_IN  12344
 #define VISU_OSC_OUT 12346
-#define SERVER_PORT 12345
+
+#define VISU_OSC_IN2 11000
+#define VISU_OSC_OUT2 11001
+#define SERVER_PORT 20000
 
 
 #define VISU_OSC_IP_OUT "localhost"

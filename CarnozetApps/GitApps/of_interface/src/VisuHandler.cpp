@@ -138,11 +138,6 @@ const void VisuHandler::draw(int mode){
     ofSetColor(255,255,255,255);
     for (int i = 0 ; i<visuList.size();i++){
         
-        ofPushMatrix();
-        ofPushView();
-        ofPushStyle();
-        
-        if(mode==0)ofTranslate(0,0,zdepth/2);
         
         bool isOk = false;
         
@@ -165,6 +160,12 @@ const void VisuHandler::draw(int mode){
         
         
         if(isOk){
+            ofPushMatrix();
+            ofPushView();
+            ofPushStyle();
+
+            if(mode==0)ofTranslate(0,0,zdepth/2);
+
             visuList[i]->isDrawingPipe = mode==1;
             int validScreen = sH->getValidScreen(visuList[i]->screenN);
             if(validScreen>=0){
@@ -222,11 +223,11 @@ const void VisuHandler::draw(int mode){
                 
                 
             }
-            
+            ofPopStyle();
+            ofPopView();
+            ofPopMatrix();
         }
-        ofPopStyle();
-        ofPopView();
-        ofPopMatrix();
+
         visuList[i]->isDrawingPipe = false;
         
     }

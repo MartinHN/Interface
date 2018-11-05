@@ -12,6 +12,7 @@ linuxarm*/
 scripts/
 
 libs/openFrameworksCompiled/lib/
+music/
 
 **/models/
 **/obj/

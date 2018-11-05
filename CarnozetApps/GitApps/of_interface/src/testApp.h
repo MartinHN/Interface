@@ -98,7 +98,7 @@ public:
 
 
     bool iscam;
-    bool isFPS;
+
 
     
     
@@ -171,7 +171,7 @@ public:
     ofxOscParameterSync * paramSync2;
 #endif
 
-    
+    bool isFPS;
     ofxOscParameterSync screenSync;
     ofParameterGroup screensParam;
     

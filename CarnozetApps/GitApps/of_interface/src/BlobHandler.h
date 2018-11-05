@@ -14,7 +14,7 @@
 #include "Constants.h"
 #include "ofMain.h"
 
-#define USE_ONE_CHANNEL 1
+
 class BlobHandler{
     
 public:

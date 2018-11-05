@@ -369,7 +369,7 @@ void Particles::draw(int w, int h){
     
    
     
-    glPointSize(particleSize);
+    glPointSize(particleSize*w/1000.0);
 //    glBegin( GL_POINTS ); 
 //    for(int x = 0; x < textureRes; x++){
 //        for(int y = 0; y < textureRes; y++){

@@ -12,7 +12,7 @@
 
 background::background(VisuHandler * v):VisuClass(v){
     MYPARAM(type,0,0,10);
-    MYPARAM(followFam,-1,0,3);
+    MYPARAM(followFam,-1,-1,3);
     MYPARAM(alpha,0.3f,0.f,1.f);
     MYPARAM(center, ofVec2f(0.5), ofVec2f(-1), ofVec2f(2));
     MYPARAM(color, ofVec3f(255), ofVec3f(0), ofVec3f(255));
@@ -54,7 +54,7 @@ else{vector<ofVec3f> cur = dad->attr->getType(followFam,w,h);
     if(cur.size()>0){
         lastPoint = cur[0]*alpha + lastPoint*(1.0-alpha);
     }
-    rect.setFromCenter(lastPoint*ofVec2f(w,h), w*scale, h*scale*ratio);
+    rect.setFromCenter(lastPoint, w*scale, h*scale*ratio);
 }
     if(type>0)
         bg.draw(rect);

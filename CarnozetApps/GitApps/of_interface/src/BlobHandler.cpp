@@ -9,7 +9,7 @@
 
 
 #include "BlobHandler.h"
-
+#define USE_ONE_CHANNEL 0
 
 void BlobHandler::setup(int inwin, int inhin,ScreenHandler * sHin){
     inw = inwin;
@@ -32,7 +32,7 @@ void BlobHandler::setupData(ofShader* blurXin,ofShader * blurYin){
     //    blobClient.setServerName("");
 #if USE_ONE_CHANNEL
     syphonTex.allocate(inw,inh,GL_R8);
-    pix.allocate(inw,inh,1);
+//    pix.allocate(inw,inh,1);
 #else
     syphonTex.allocate(inw,inh,GL_RGB);
     pix.allocate(inw,inh,3);
@@ -75,7 +75,7 @@ void BlobHandler::registerParams(){
     MYPARAM(maxSide,1.f,0.f,1.f);
     MYPARAM(maxBlobs, 1,0,4);
     MYPARAM(findHoles,false,false,true);
-    MYPARAM(simplification,0.f,0.f,50.f);
+    MYPARAM(simplification,0.f,0.f,.1f);
     MYPARAM(smooth,0.f,0.f,10.f);
     MYPARAM(polyMaxPoints, 0,0,200);
     MYPARAM(maxLengthExtrem, 15.f,0.f,100.f);
@@ -139,25 +139,26 @@ void BlobHandler::getGS(){
 
     glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_DST_ALPHA);
     syphonTex.begin();
-
-    threshBW.begin();
-    threshBW.setUniform1f("thresh",(float)(vidThreshold/255.0f));
-    threshBW.setUniform1f("colOn",invertBW?0:1);
-    threshBW.setUniform1f("colOff",invertBW?1:0);
-
+    if(vidThreshold>0){
+        threshBW.begin();
+        threshBW.setUniform1f("thresh",(float)(vidThreshold/255.0f));
+        threshBW.setUniform1f("colOn",invertBW?0:1);
+        threshBW.setUniform1f("colOff",invertBW?1:0);
+    }
     ofSetColor(255);
-    //    syphonTex.src->draw(0,0);
     blobClient.draw(0,0);
-    threshBW.end();
+    if(vidThreshold>0){
+        threshBW.end();
+    }
     syphonTex.end();
 
     auto & tr = syphonTex.getTextureReference();
     tr.bind();
-    glGetTexImage(tr.texData.textureTarget,0,ofGetGlFormat(pix),GL_UNSIGNED_BYTE, pix.getPixels());
+    glGetTexImage(tr.texData.textureTarget,0,GL_RED,GL_UNSIGNED_BYTE, gs.getPixels());
     tr.unbind();
 
     //    syphonTex.dst->readToPixels(pix);
-    gs.setFromPixels(pix);
+//    gs.setFromPixels(pix);
     //    gs.updateTexture();
 
 #else
@@ -243,14 +244,14 @@ void BlobHandler::compCache(){
             pp.lineTo(p);
         }
 
-        if(polyMaxPoints>0){pp=pp.getResampledByCount(polyMaxPoints);}
+
         if(simplification>0){
             pp.simplify(simplification);
-
         }
         if(smooth>0){
             pp = pp.getSmoothed(smooth);
         }
+        if(polyMaxPoints>0){pp=pp.getResampledByCount(polyMaxPoints);}
         if(pp.size()>0){
             pp.close();
 

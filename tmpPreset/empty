@@ -9,14 +9,14 @@
 		<bback>255</bback>
 		<alphablur>255</alphablur>
 		<bloomsize>0</bloomsize>
-		<isGloom>1</isGloom>
+		<isGloom>0</isGloom>
 		<invertColor>0</invertColor>
-		<isKaleidoscope>1</isKaleidoscope>
+		<isKaleidoscope>0</isKaleidoscope>
 		<kaleidoscopeScaleX>0.749756</kaleidoscopeScaleX>
 		<kaleidoscopeScaleY>0.556585</kaleidoscopeScaleY>
 		<kaleidoscopeBlend>0</kaleidoscopeBlend>
 		<kaleidoscopeAngle>0</kaleidoscopeAngle>
-		<isPipe>1</isPipe>
+		<isPipe>0</isPipe>
 		<pipeblur>3.65854</pipeblur>
 		<pipeAlphablur>255</pipeAlphablur>
 		<hidePipe>0</hidePipe>
@@ -73,7 +73,7 @@
 	</screensCtl>
 	<Visu>
 		<background>
-			<isActive>1</isActive>
+			<isActive>0</isActive>
 			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>
@@ -90,7 +90,7 @@
 			<fill>1</fill>
 		</background>
 		<particles>
-			<isActive>1</isActive>
+			<isActive>0</isActive>
 			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>
@@ -225,8 +225,8 @@
 			<insideMode>0</insideMode>
 		</AutoTree>
 		<drawBlob>
-			<isActive>1</isActive>
-			<isPiping>1</isPiping>
+			<isActive>0</isActive>
+			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>
 			<isMapping>0</isMapping>
@@ -241,7 +241,7 @@
 			<alpha>255</alpha>
 		</drawBlob>
 		<ColorRuban>
-			<isActive>1</isActive>
+			<isActive>0</isActive>
 			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>
@@ -272,7 +272,7 @@
 			<alphaColor>0</alphaColor>
 		</Liner>
 		<boule2gomme>
-			<isActive>1</isActive>
+			<isActive>0</isActive>
 			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>

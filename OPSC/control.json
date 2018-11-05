@@ -19,8 +19,8 @@
       "widgets": [
         {
           "type": "push",
-          "top": 20,
-          "left": 0,
+          "top": 10,
+          "left": "100%",
           "id": "Connect",
           "linkId": "",
           "width": "auto",
@@ -30,17 +30,17 @@
           "precision": 2,
           "address": "/addMe",
           "preArgs": "",
-          "target": "",
+          "target": "127.0.0.1:20000",
           "bypass": false,
           "color": "auto",
           "on": 1,
           "off": 0,
-          "norelease": false
+          "norelease": true
         },
         {
           "type": "panel",
-          "top": 110,
-          "left": 90,
+          "top": 90,
+          "left": "100%",
           "id": "default_visu",
           "linkId": "",
           "width": 480,
@@ -160,7 +160,8 @@
                   "unit": "",
                   "origin": "auto",
                   "touchAddress": "",
-                  "meterAddress": ""
+                  "meterAddress": "",
+                  "steps": ""
                 },
                 {
                   "type": "rgb",
@@ -175,7 +176,6 @@
                     "max": 255
                   },
                   "input": false,
-                  "useAlpha": false,
                   "default": "",
                   "value": "",
                   "precision": 2,
@@ -185,6 +185,7 @@
                   "bypass": false,
                   "split": false,
                   "width": "auto",
+                  "alpha": false,
                   "pointSize": 10
                 }
               ],
@@ -214,6 +215,45 @@
             }
           ],
           "tabs": []
+        },
+        {
+          "type": "fader",
+          "top": 0,
+          "left": 0,
+          "id": "/OF/global/brightnessM",
+          "linkId": "",
+          "width": "10%",
+          "height": "100%",
+          "label": false,
+          "color": "auto",
+          "css": "",
+          "horizontal": false,
+          "alignRight": false,
+          "pips": true,
+          "input": true,
+          "meter": false,
+          "compact": true,
+          "dashed": false,
+          "snap": false,
+          "spring": false,
+          "doubleTap": false,
+          "range": {
+            "min": 0,
+            "max": 100
+          },
+          "steps": "",
+          "logScale": false,
+          "unit": "",
+          "origin": "auto",
+          "default": "",
+          "value": "",
+          "precision": 2,
+          "address": "@{this.id}",
+          "preArgs": "",
+          "target": "",
+          "bypass": false,
+          "touchAddress": "",
+          "meterAddress": ""
         }
       ],
       "tabs": [],
@@ -260,7 +300,7 @@
           "default": "",
           "value": "",
           "split": false,
-          "useAlpha": true,
+          "alpha": false,
           "pointSize": 10
         },
         {
@@ -348,7 +388,8 @@
                   "origin": "auto",
                   "touchAddress": "",
                   "meterAddress": "",
-                  "width": "auto"
+                  "width": "auto",
+                  "steps": ""
                 },
                 {
                   "type": "fader",
@@ -383,7 +424,8 @@
                   "bypass": false,
                   "touchAddress": "",
                   "meterAddress": "",
-                  "width": "auto"
+                  "width": "auto",
+                  "steps": ""
                 }
               ],
               "scroll": true,
@@ -558,7 +600,8 @@
                           "bypass": false,
                           "touchAddress": "",
                           "meterAddress": "",
-                          "width": "auto"
+                          "width": "auto",
+                          "steps": ""
                         },
                         {
                           "type": "fader",
@@ -593,7 +636,8 @@
                           "bypass": false,
                           "touchAddress": "",
                           "meterAddress": "",
-                          "width": "auto"
+                          "width": "auto",
+                          "steps": ""
                         },
                         {
                           "type": "fader",
@@ -628,7 +672,8 @@
                           "bypass": false,
                           "touchAddress": "",
                           "meterAddress": "",
-                          "width": "auto"
+                          "width": "auto",
+                          "steps": ""
                         },
                         {
                           "type": "fader",
@@ -663,7 +708,8 @@
                           "bypass": false,
                           "touchAddress": "",
                           "meterAddress": "",
-                          "width": "auto"
+                          "width": "auto",
+                          "steps": ""
                         }
                       ],
                       "tabs": []
@@ -822,7 +868,7 @@
                   },
                   "width": "auto",
                   "split": false,
-                  "useAlpha": true,
+                  "alpha": false,
                   "pointSize": 10
                 },
                 {
@@ -969,7 +1015,7 @@
               "id": "/OF/Visu/particles/origin/isActive",
               "linkId": "",
               "height": "auto",
-              "label": "auto",
+              "label": "origin",
               "color": "auto",
               "css": "",
               "on": 1,
@@ -980,7 +1026,7 @@
               "target": "",
               "bypass": false,
               "doubleTap": false,
-              "led": false,
+              "led": true,
               "default": "",
               "value": ""
             }

@@ -83,7 +83,6 @@ void metaBalls::update(int w, int h){
             if(tmp.size()>0){
                 for (int i = 0 ; i< tmp.size() ; i++){
                     if(tmp[i].lifetime>0)points.push_back(tmp[i]);
-
                 }
 
             }
@@ -100,6 +99,7 @@ void metaBalls::update(int w, int h){
                     if(dpoints.size()>1){curangle = tmpv.angle(dpoints[(i+1)%dpoints.size()]-dpoints[i]);}
                     tmpv.rotate(ofRandom(noise)*360+curangle,ofVec3f(0,0,1));
                     if(emitrate==0 && points.size()>1){
+
                         auto last = points[points.size()-1];
                         auto dist = last.distance(dpoints[i]);
                         if(dist>0 ){

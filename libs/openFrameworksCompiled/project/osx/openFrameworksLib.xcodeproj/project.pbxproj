@@ -917,6 +917,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/../../lib/osx/";
 				CONFIGURATION_TEMP_DIR = "$(SRCROOT)/../../lib/osx/build/debug/";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OBJROOT = "$(SRCROOT)/../../lib/osx/build/debug/";
 				SDKROOT = macosx10.11;

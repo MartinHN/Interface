@@ -53,7 +53,8 @@ void drawBlob::draw(int w, int h){
     for(int i  = 0 ; i< paths.size();i++){
         ofPath pp =paths[i];
         pp.setFillColor(col);
-        if(pp.getOutline().size()>0 && pp.getOutline()[0].size()>0)
+        auto & outl = pp.getOutline();
+        if(outl.size()>0 && outl[0].size()>0)
             pp.draw();
     }
     
