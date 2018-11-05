@@ -17,6 +17,12 @@ music/
 **/models/
 **/obj/
 
+*.mp3
+*.wav
+*.ogg
+*.asd
+**/Iconr
+
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
