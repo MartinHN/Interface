@@ -19,7 +19,7 @@ drawBlob::drawBlob(VisuHandler * v):VisuClass(v){
     MYPARAM(alphapos,.3f,0.f,1.f);
     MYPARAM(scale,ofVec2f(1),ofVec2f(0),ofVec2f(2));
     MYPARAM(color,ofVec3f(255),ofVec3f(0),ofVec3f(255));
-    MYPARAM(alpha,255.f,0.f,255.f);
+    MYPARAM(alphaColor,255,0,255);
     
     
     
@@ -46,9 +46,9 @@ void drawBlob::draw(int w, int h){
     ofPushMatrix();
     
     ofTranslate(w*(realPos.x-scale->x/2.),h*(realPos.y-scale->y/2.), (realPos.z-0.5)*dad->zdepth);
-    auto col =ofColor(color->x,color->y,color->z,alpha);
+    auto col =ofColor(color->x,color->y,color->z,alphaColor);
     if(isDrawingPipe){
-        col.set(255,255,255,alpha); // draw white in pipe
+        col.set(255,255,255,alphaColor); // draw white in pipe
     }
     for(int i  = 0 ; i< paths.size();i++){
         ofPath pp =paths[i];

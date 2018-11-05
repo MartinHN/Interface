@@ -11,7 +11,7 @@
 #include "ofxGui.h"
 #include "ofMain.h"
 #include "Constants.h"
-#define PARAMW 210
+
 
 
 class Gui{

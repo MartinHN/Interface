@@ -35,29 +35,30 @@ void Gui::load(ofParameterGroup & pgtmp,int targetW,int targetH){
     if(targetH ==0){
         targetH = ofGetHeight();
     }
+    int pW = targetW/5;
+    ofxBaseGui::setDefaultWidth(.98*pW);
     guiParam.push_back(new ofxPanel());
-    guiParam.back()->setDefaultWidth(.98*PARAMW);
-    guiParam.back()->setup(pgtmp.getGroup("global"),pgtmp.getGroup("global").getName(),(baseC)*PARAMW);
+    guiParam.back()->setup(pgtmp.getGroup("global"),pgtmp.getGroup("global").getName(),(baseC)*pW);
     
     baseC++;
     int h = guiParam.back()->getHeight() + 10;
     
 
     guiParam.push_back(new ofxPanel());
-    guiParam.back()->setup(pgtmp.getGroup("attrCtl"),pgtmp.getGroup("attrCtl").getName(),(baseC)*PARAMW);
+    guiParam.back()->setup(pgtmp.getGroup("attrCtl"),pgtmp.getGroup("attrCtl").getName(),(baseC)*pW);
 //    guiParam.back()->minimizeAll();
     
     h += guiParam.back()->getHeight() + 10;
     baseC++;
     guiParam.push_back(new ofxPanel());
-    guiParam.back()->setup(pgtmp.getGroup("blobsettings"),pgtmp.getGroup("blobsettings").getName(),(baseC)*PARAMW);
+    guiParam.back()->setup(pgtmp.getGroup("blobsettings"),pgtmp.getGroup("blobsettings").getName(),(baseC)*pW);
 //    guiParam.back()->minimizeAll();
     
     h += guiParam.back()->getHeight() + 10;
     baseC++;
     
     guiParam.push_back(new ofxPanel());
-    guiParam.back()->setup(pgtmp.getGroup("screensCtl"),pgtmp.getGroup("screensCtl").getName(),(baseC)*PARAMW);
+    guiParam.back()->setup(pgtmp.getGroup("screensCtl"),pgtmp.getGroup("screensCtl").getName(),(baseC)*pW);
     //    guiParam.back()->minimizeAll();
     
     h += guiParam.back()->getHeight() + 10;
@@ -71,7 +72,7 @@ void Gui::load(ofParameterGroup & pgtmp,int targetW,int targetH){
     guiScreen.back()->minimizeAll();
     
     
-    guiParam.back()->setDefaultWidth(.98*PARAMW);
+    guiParam.back()->setDefaultWidth(.98*pW);
     
     baseC= 0;
     
@@ -80,8 +81,8 @@ void Gui::load(ofParameterGroup & pgtmp,int targetW,int targetH){
     
     
     for (int i = 0 ; i< pgtmp2.size();i++){
-        int l =  targetH/2*int((baseC)*PARAMW/(targetW*(4.5/5)));
-        int c = PARAMW*((int)(baseC)%(int)(targetW/PARAMW));
+        int l =  targetH/2*int((baseC)*pW/(targetW*(4.5/5)));
+        int c = pW*((int)(baseC)%(int)(targetW/pW));
         
         ofAbstractParameter * p = &pgtmp2.get(i); 
         if(p->type()==typeid(ofParameterGroup).name()){
@@ -115,10 +116,6 @@ void Gui::draw(int w, int h){
         }
 
     }
-    else if(visuSettings == 3){
-        ofSetColor(0);
-        ofRect(0,0,w,h);
 
-    }
     
 }

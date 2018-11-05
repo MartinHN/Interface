@@ -24,7 +24,7 @@ public:
     ofParameter<ofVec3f> pos,color;
     ofParameter<ofVec2f> scale;
     ofParameter<bool> invertx,inverty;
-    ofParameter<float> alpha;
+    ofParameter<int> alphaColor;
     
     ofParameter<float> alphapos;
     

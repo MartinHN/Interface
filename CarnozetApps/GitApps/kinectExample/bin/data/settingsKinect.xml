@@ -1,0 +1,7 @@
+<settings>
+	<nearThreshold>255</nearThreshold>
+	<farThreshold>191</farThreshold>
+	<bThreshWithOpenCV>1</bThreshWithOpenCV>
+	<angle>16.2</angle>
+<settings/>
+</settings>

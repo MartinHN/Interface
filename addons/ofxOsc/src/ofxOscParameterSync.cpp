@@ -34,6 +34,7 @@ void ofxOscParameterSync::update(){
 }
 
 void ofxOscParameterSync::parameterChanged( ofAbstractParameter & parameter ){
-	if(updatingParameter) return;
+//	if(updatingParameter) return;
+    if(updatingParameter && receiver.currentParameterSet==&parameter)return;
 	sender.sendParameter(parameter);
 }

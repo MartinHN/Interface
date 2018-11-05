@@ -37,6 +37,7 @@
 ofxOscReceiver::ofxOscReceiver()
 {
 	listen_socket = NULL;
+    currentParameterSet = NULL;
 }
 
 void ofxOscReceiver::setup( int listen_port )
@@ -228,6 +229,7 @@ bool ofxOscReceiver::getParameter(ofAbstractParameter & parameter){
 	ofxOscMessage msg;
 	if ( messages.size() == 0 ) return false;
 	while(hasWaitingMessages()){
+        currentParameterSet = NULL;
 		ofAbstractParameter * p = &parameter;
 		getNextMessage(&msg);
 		vector<string> address = ofSplitString(msg.getAddress(),"/",true);
@@ -251,6 +253,7 @@ bool ofxOscReceiver::getParameter(ofAbstractParameter & parameter){
                 else if(p->type()==typeid(ofParameter<ofVec4f>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT ){
                     if(msg.getNumArgs()!=4){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
                     else{
+                        currentParameterSet = p;
                         ofVec4f vt;
                         for(int i  = 0 ; i < 4 ; i++){
                             vt[i] = msg.getArgAsFloat(i);
@@ -261,6 +264,7 @@ bool ofxOscReceiver::getParameter(ofAbstractParameter & parameter){
                 else if(p->type()==typeid(ofParameter<ofVec3f>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT ){
                     if(msg.getNumArgs()!=3){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
                     else{
+                        currentParameterSet = p;
                     ofVec3f vt;
                     for(int i  = 0 ; i < 3 ; i++){
 					vt[i] = msg.getArgAsFloat(i);
@@ -272,6 +276,7 @@ bool ofxOscReceiver::getParameter(ofAbstractParameter & parameter){
                 else if(p->type()==typeid(ofParameter<ofVec2f>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT){
                     if(msg.getNumArgs()!=2){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
                     else{
+                        currentParameterSet = p;
                     ofVec2f vt;
                     for(int i  = 0 ; i < 2 ; i++){
                         vt[i] = msg.getArgAsFloat(i);
@@ -283,17 +288,22 @@ bool ofxOscReceiver::getParameter(ofAbstractParameter & parameter){
                 
                 
                 else if(p->type()==typeid(ofParameter<int>).name() && msg.getArgType(0)==OFXOSC_TYPE_INT32){
+                    currentParameterSet = p;
 					p->cast<int>() = msg.getArgAsInt32(0);
 				}else if(p->type()==typeid(ofParameter<float>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT){
+                    currentParameterSet = p;
 					p->cast<float>() = msg.getArgAsFloat(0);
 				}else if(p->type()==typeid(ofParameter<bool>).name() && msg.getArgType(0)==OFXOSC_TYPE_INT32){
+                    currentParameterSet = p;
 					p->cast<bool>() = msg.getArgAsInt32(0);
 				}else if(p->type()==typeid(ofParameter<string>).name() && msg.getArgType(0)==OFXOSC_TYPE_STRING){
+                    currentParameterSet = p;
 					p->cast<string>() = msg.getArgAsString(0);
 				}
 
                 
                 else if(msg.getArgType(0)==OFXOSC_TYPE_STRING){
+                    currentParameterSet = p;
 					p->fromString(msg.getArgAsString(0));
 				}
                 else{

@@ -34,8 +34,8 @@ void testApp::setup(){
     width = ofGetWindowWidth();
     height = ofGetWindowHeight();
 
-    inw=320;
-    inh=240;
+    inw=640;//320;
+    inh=480;//240;
 
 
     //Zdepth
@@ -578,22 +578,32 @@ void testApp::keyPressed(int key){
     switch (key){
         case 's':
         {ofFileDialogResult filep = ofSystemSaveDialog("preset","save preset file");
-            saveName = filep.getPath();}
+            saveName = filep.getPath();
+        }
             break;
+
         case 'l':
         {ofFileDialogResult filep = ofSystemLoadDialog("load preset");
-            loadName = filep.getPath();}
+            loadName = filep.getPath();
+
+        }
             break;
+        case 'r':
+            if(ofFile(loadName).exists()){
+                saveName = loadName;
+            }
+            break;
+
 
         case'v':
             gui.visuSettings++;
-            gui.visuSettings %=3 ;
+            gui.visuSettings %=2 ; // ignore screen
             break;
-        case 'o':
+        case 'g':
             liveMode = !liveMode;
-            ofSetWindowShape(liveMode?100:800, liveMode?100:800);
+            ofSetWindowShape(liveMode?100:1000, liveMode?30:800);
             if(liveMode){gui.unload();}
-            else{gui.load(globalParam,800,800);}
+            else{gui.load(globalParam,1000,800);}
 
 
             break;
@@ -778,9 +788,11 @@ void testApp::clientServerUpdate(){
 void testApp::saveState(string & s){
 #ifdef GUIMODE
     if(s!=""){
-        string abspath = ofToDataPath("presets/filage/"+ofToString(loadName));
+        string abspath = ofToDataPath("presets/filage/"+ofToString(s));
         if(s.find("/")!=string::npos) {abspath = s;}
-        else{ofLogWarning("saving to local : " + abspath);}
+        else{
+            ofLogWarning("saving to local : " + abspath);
+        }
         cout<<"saving to " + abspath<<endl;
         ofXml xml;
         sH.screensParam.setSerializable(false);
@@ -801,10 +813,15 @@ void testApp::saveState(string & s){
 void testApp::loadState(string & s){
     //#if defined GUIMODE || defined STANDALONEMODE
     string abspath = "";
+    if(s=="")return;
 #ifdef GUIMODE
     if(s.find("/")!=string::npos){abspath = s;}
+    else{
+        abspath = ofToDataPath("presets/filage/"+ofToString(s),true);
+        loadName = abspath; // will not retrigger loadState
+    }
 #else
-    if(s.find("/")==string::npos){ abspath = ofToDataPath("presets/filage/"+ofToString(s));}
+    if(s.find("/")==string::npos){ abspath = ofToDataPath("presets/filage/"+ofToString(s),true);}
     else ofLogWarning("wrong preset name");
 #endif
     

@@ -9,7 +9,7 @@
 
 
 #include "BlobHandler.h"
-#define USE_ONE_CHANNEL 0
+#define USE_ONE_CHANNEL 1
 
 void BlobHandler::setup(int inwin, int inhin,ScreenHandler * sHin){
     inw = inwin;
@@ -25,10 +25,11 @@ void BlobHandler::setupData(ofShader* blurXin,ofShader * blurYin){
     blurX=blurXin;
     blurY = blurYin;
     blobClient.setup();
-    //    blobClient.setApplicationName("kinectExampleDebug");
+        blobClient.setApplicationName("kinectExample");
+//    blobClient.setApplicationName("kinectExampleDebug");
     //    blobClient.setServerName("blob");
     //    blobClient.setApplicationName("Simple Server");
-    blobClient.setApplicationName("Arena");
+//    blobClient.setApplicationName("Arena");
     //    blobClient.setServerName("");
 #if USE_ONE_CHANNEL
     syphonTex.allocate(inw,inh,GL_R8);
@@ -341,9 +342,7 @@ vector<ofVec3f> BlobHandler::compExtrems(float w, float h){
 
         while(end<tmpspaced.size()+maxLengthExtrem){
 
-            auto cur_angle = tmpspaced.getRotationAtIndex(end%tmpspaced.size()).z>0?
-                        +tmpspaced.getAngleAtIndex(end%tmpspaced.size()):
-                        -tmpspaced.getAngleAtIndex(end%tmpspaced.size());
+            auto cur_angle =tmpspaced.getAngleAtIndex(end%tmpspaced.size())* (tmpspaced.getRotationAtIndex(end%tmpspaced.size()).z>0?1:-1)*(invertX?-1:1);
 
             if(end-begin<=maxLengthExtrem){
 

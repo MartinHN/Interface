@@ -20,8 +20,8 @@ public:
     
     void draw(int w, int h);
     void update(int w, int h);
-    ofParameter<float> width,alphaColor;
-    ofParameter<int> steps;
+    ofParameter<float> width;
+    ofParameter<int> steps,alphaColor;
     ofParameter<bool> drawCentr;
     ofParameter<float> rotAngle;
     ofParameter<ofVec3f> color;

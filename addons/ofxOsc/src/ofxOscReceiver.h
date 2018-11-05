@@ -64,6 +64,7 @@ public:
 	bool getNextMessage( ofxOscMessage* );
 
 	bool getParameter(ofAbstractParameter & parameter);
+    ofAbstractParameter * currentParameterSet;
 
 protected:
 	/// process an incoming osc message and add it to the queue
