@@ -33,7 +33,7 @@
 	<blobsettings>
 		<isPiping>0</isPiping>
 		<vidThreshold>11.7092</vidThreshold>
-		<invertBW>1</invertBW>
+		<invertBW>0</invertBW>
 		<minSide>0.09</minSide>
 		<maxSide>0.98</maxSide>
 		<maxBlobs>1</maxBlobs>
@@ -238,7 +238,7 @@
 			<alphapos>0.3</alphapos>
 			<scale>1.08412, 1.0733</scale>
 			<color>0, 0, 0</color>
-			<alpha>255</alpha>
+			<alphaColor>255</alphaColor>
 		</drawBlob>
 		<ColorRuban>
 			<isActive>1</isActive>
@@ -272,7 +272,7 @@
 			<alphaColor>0</alphaColor>
 		</Liner>
 		<boule2gomme>
-			<isActive>1</isActive>
+			<isActive>0</isActive>
 			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>

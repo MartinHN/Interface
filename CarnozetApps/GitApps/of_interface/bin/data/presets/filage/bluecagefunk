@@ -272,7 +272,7 @@
 			<alphaColor>0</alphaColor>
 		</Liner>
 		<boule2gomme>
-			<isActive>1</isActive>
+			<isActive>0</isActive>
 			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>

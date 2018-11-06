@@ -34,8 +34,8 @@ void testApp::setup(){
     width = ofGetWindowWidth();
     height = ofGetWindowHeight();
 
-    inw=640;//320;
-    inh=480;//240;
+    inw=SYPHON_W;//320;
+    inh=SYPHON_H;//240;
 
 
     //Zdepth

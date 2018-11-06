@@ -21,7 +21,10 @@
 
 #define VISU_OSC_IP_OUT "localhost"
 
-
+#define SYPHON_W 640/2
+#define SYPHON_H 480/2
+#define PIPE_W SYPHON_W
+#define PIPE_H SYPHON_H
 
 #define MYPARAM(nom,init,min,max) nom.setName(#nom);nom.setMin(min);nom.setMax(max);settings.add(nom);nom=init;
 

@@ -114,7 +114,7 @@ void Ecran::calcRectMax(){
     int maxX = -99999;
     int maxY = -99999;
     
-    miniScale = ofVec2f(320.0/(*scrw),240.0/(*scrh));
+    miniScale = ofVec2f(PIPE_W*1.0/(*scrw),PIPE_H*1.0/(*scrh));
     vector<ofVec3f> vert = getVertices();
     for( int i = 0 ; i<  vert.size() ; i++ ){
         ofVec3f tmp = vert[i];

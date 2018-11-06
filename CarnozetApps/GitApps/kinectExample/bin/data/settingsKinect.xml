@@ -1,7 +1,13 @@
 <settings>
 	<nearThreshold>255</nearThreshold>
-	<farThreshold>191</farThreshold>
+	<farThreshold>47</farThreshold>
 	<bThreshWithOpenCV>1</bThreshWithOpenCV>
-	<angle>16.2</angle>
+	<angle>18.5</angle>
 <settings/>
+<calib>
+		<p1>0.11, 0.25</p1>
+		<p2>0.89, 0.29</p2>
+		<p3>0.94, 0.98</p3>
+		<p4>0.06, 0.92</p4>
+	</calib>
 </settings>

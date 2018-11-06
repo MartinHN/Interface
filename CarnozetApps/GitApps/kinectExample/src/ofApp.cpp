@@ -1,7 +1,6 @@
 #include "ofApp.h"
 #include "ofxXmlSettings.h"
-#define P(nom,init,min,max) nom.setName(#nom);nom.setMin(min);nom.setMax(max);settings.add(nom);nom=init;
-#define PB(nom,init) P(nom,init,false,true);
+#include "ParamHelpers.h"
 //--------------------------------------------------------------
 void ofApp::setup() {
     settingFile = "settingsKinect.xml";
@@ -54,20 +53,23 @@ void ofApp::setup() {
     PB(isOpen,true);
     isOpen.setSerializable(false);
     isOpen.addListener(this,&ofApp::openCloseKinnect);
-
+    settings.add(calib.settings);
     kinectCtrl.setup(settings,"",10,20);
     drawGUI = true;
 
     kinectCtrl.loadFromFile(settingFile);
 
     syphonServer.setName("");
+
+
+    osc.setup(11002);
 }
 
 
 
 //--------------------------------------------------------------
 void ofApp::update() {
-
+    updateOSC();
     ofBackground(100, 100, 100);
 
     kinect.update();
@@ -75,9 +77,11 @@ void ofApp::update() {
 
     // there is a new frame and we are connected
     if(kinect.isFrameNewDepth()) {
+        calib.computeOnTexture(kinect.getDepthTextureReference(),true);
 
         // load grayscale depth image from the kinect source
-        grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
+        grayImage.setFromPixels(calib.pixels);
+//        grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
 
         // we do two thresholds - one for the far plane and one for the near plane
         // we then do a cvAnd to get the pixels which are a union of the two thresholds
@@ -128,14 +132,18 @@ if(drawGUI) {
     
     // draw from the live kinect
     int left = ofGetWidth()/2;
-    int height = 300;
+    int height = 250;
     int cH = 0;
-    kinect.drawDepth(left, cH, 400, 300);
+    kinect.drawDepth(left, cH, 400, height);
+    calib.drawUI(ofRectangle(left, cH, 400, height));
     cH+=height;
-    grayImage.draw(left, cH, 400, 300);
+    grayImage.draw(left, cH, 400, height);
+    cH+=height;
+
+    calib.mappedTexture.draw(left,cH,400,height);
     cH+=height;
 #if CONTOUR
-    contourFinder.draw(10, 320, 400, 300);
+    contourFinder.draw(10, 320, 400, height);
 #endif
 }
  if(!drawGUI && ofGetWidth()!=100){
@@ -218,5 +226,19 @@ void ofApp::openCloseKinnect(bool & b){
     else{
         kinect.setCameraTiltAngle(0);
         kinect.close();
+    }
+}
+
+void ofApp::updateOSC(){
+    if(osc.hasWaitingMessages()){
+        ofxOscMessage m;
+        while(osc.getNextMessage(&m)){
+            if(m.getAddress()=="/p1"){calib.p1 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
+            else if(m.getAddress()=="/p2"){calib.p2 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
+            else if(m.getAddress()=="/p3"){calib.p3 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
+            else if(m.getAddress()=="/p4"){calib.p4 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
+            else if(m.getAddress()=="/tilt"){angle = m.getArgAsFloat(0);}
+
+        }
     }
 }
