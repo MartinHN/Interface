@@ -56,17 +56,12 @@
 		DACFA8E8132D09E8008D4B7A /* ofVbo.h in Headers */ = {isa = PBXBuildFile; fileRef = DACFA8D7132D09E8008D4B7A /* ofVbo.h */; };
 		DACFA8E9132D09E8008D4B7A /* ofVboMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DACFA8D8132D09E8008D4B7A /* ofVboMesh.cpp */; };
 		DACFA8EA132D09E8008D4B7A /* ofVboMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = DACFA8D9132D09E8008D4B7A /* ofVboMesh.h */; };
-		E42732AF15F10E7A00BBC533 /* ofQuickTimePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E42732AD15F10E7A00BBC533 /* ofQuickTimePlayer.cpp */; };
-		E42732B015F10E7A00BBC533 /* ofQuickTimePlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = E42732AE15F10E7A00BBC533 /* ofQuickTimePlayer.h */; };
 		E495DF7D178896A900994238 /* ofAppNoWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E495DF7B178896A900994238 /* ofAppNoWindow.cpp */; };
 		E495DF7E178896A900994238 /* ofAppNoWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = E495DF7C178896A900994238 /* ofAppNoWindow.h */; };
 		E4998A26128A39480094AC3F /* ofEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4998A25128A39480094AC3F /* ofEvents.cpp */; };
 		E4B27C1910CBEB9D00536013 /* ofAppRunner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B27AAF10CBE92A00536013 /* ofAppRunner.cpp */; };
 		E4B27C1A10CBEB9D00536013 /* ofArduino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B27AB310CBE92A00536013 /* ofArduino.cpp */; };
 		E4B27C1B10CBEB9D00536013 /* ofSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B27AB510CBE92A00536013 /* ofSerial.cpp */; };
-		E4B27C2510CBEB9D00536013 /* ofQtUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B27AD610CBE92A00536013 /* ofQtUtils.cpp */; };
-		E4B27C2610CBEB9D00536013 /* ofVideoGrabber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B27ADB10CBE92A00536013 /* ofVideoGrabber.cpp */; };
-		E4B27C2710CBEB9D00536013 /* ofVideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B27ADD10CBE92A00536013 /* ofVideoPlayer.cpp */; };
 		E4B27C2810CBEBAB00536013 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E4B27C2910CBEBAB00536013 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
 		E4B27C2A10CBEBAB00536013 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
@@ -76,8 +71,6 @@
 		E4B27C2E10CBEBAB00536013 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9770E8CC7DD009D7055 /* CoreServices.framework */; };
 		E4B27C3010CBEBAB00536013 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9790E8CC7DD009D7055 /* OpenGL.framework */; };
 		E4B27C3110CBEBAB00536013 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */; };
-		E4B5AE2012D94F9B00BA355D /* ofQuickTimeGrabber.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B5AE1612D94F9B00BA355D /* ofQuickTimeGrabber.cpp */; };
-		E4B5AE2112D94F9B00BA355D /* ofQuickTimeGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = E4B5AE1712D94F9B00BA355D /* ofQuickTimeGrabber.h */; };
 		E4C5E387131AC1B10050F992 /* ofRtAudioSoundStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E4C5E385131AC1B10050F992 /* ofRtAudioSoundStream.h */; };
 		E4C5E388131AC1B10050F992 /* ofRtAudioSoundStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4C5E386131AC1B10050F992 /* ofRtAudioSoundStream.cpp */; };
 		E4C5E38B131AC1BE0050F992 /* ofBaseSoundStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E4C5E389131AC1BE0050F992 /* ofBaseSoundStream.h */; };
@@ -145,12 +138,6 @@
 		E4F3BB2E12F4C752002D19BB /* ofTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4F3BB1612F4C752002D19BB /* ofTrueTypeFont.cpp */; };
 		E4F3BB2F12F4C752002D19BB /* ofTrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = E4F3BB1712F4C752002D19BB /* ofTrueTypeFont.h */; };
 		E703368A15D4AF13009A3FDE /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E703368915D4AF13009A3FDE /* CoreVideo.framework */; };
-		E703369315D4B03E009A3FDE /* ofQTKitGrabber.h in Headers */ = {isa = PBXBuildFile; fileRef = E703368D15D4B03E009A3FDE /* ofQTKitGrabber.h */; };
-		E703369415D4B03E009A3FDE /* ofQTKitGrabber.mm in Sources */ = {isa = PBXBuildFile; fileRef = E703368E15D4B03E009A3FDE /* ofQTKitGrabber.mm */; };
-		E703369515D4B03E009A3FDE /* ofQTKitPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = E703368F15D4B03E009A3FDE /* ofQTKitPlayer.h */; };
-		E703369615D4B03E009A3FDE /* ofQTKitPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E703369015D4B03E009A3FDE /* ofQTKitPlayer.mm */; };
-		FDFC9EF21600D70700EDD797 /* ofQTKitMovieRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = FDFC9EF01600D70500EDD797 /* ofQTKitMovieRenderer.h */; };
-		FDFC9EF31600D70700EDD797 /* ofQTKitMovieRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FDFC9EF11600D70600EDD797 /* ofQTKitMovieRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -626,7 +613,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B5AE2112D94F9B00BA355D /* ofQuickTimeGrabber.h in Headers */,
 				E4F3BA6812F4C4BF002D19BB /* of3dUtils.h in Headers */,
 				E4F3BA6A12F4C4BF002D19BB /* ofCamera.h in Headers */,
 				E4F3BA6C12F4C4BF002D19BB /* ofEasyCam.h in Headers */,
@@ -679,10 +665,6 @@
 				E4C5E387131AC1B10050F992 /* ofRtAudioSoundStream.h in Headers */,
 				E4C5E38B131AC1BE0050F992 /* ofBaseSoundStream.h in Headers */,
 				772BDF74146928600030F0EE /* ofOpenALSoundPlayer.h in Headers */,
-				E703369315D4B03E009A3FDE /* ofQTKitGrabber.h in Headers */,
-				E703369515D4B03E009A3FDE /* ofQTKitPlayer.h in Headers */,
-				E42732B015F10E7A00BBC533 /* ofQuickTimePlayer.h in Headers */,
-				FDFC9EF21600D70700EDD797 /* ofQTKitMovieRenderer.h in Headers */,
 				DAC22D4016E7A4AF0020226D /* ofParameter.h in Headers */,
 				DAC22D4216E7A4AF0020226D /* ofParameterGroup.h in Headers */,
 				2E6EA7011603A9E400B7ADF3 /* of3dGraphics.h in Headers */,
@@ -752,11 +734,7 @@
 				E4B27C1910CBEB9D00536013 /* ofAppRunner.cpp in Sources */,
 				E4B27C1A10CBEB9D00536013 /* ofArduino.cpp in Sources */,
 				E4B27C1B10CBEB9D00536013 /* ofSerial.cpp in Sources */,
-				E4B27C2510CBEB9D00536013 /* ofQtUtils.cpp in Sources */,
-				E4B27C2610CBEB9D00536013 /* ofVideoGrabber.cpp in Sources */,
-				E4B27C2710CBEB9D00536013 /* ofVideoPlayer.cpp in Sources */,
 				E4998A26128A39480094AC3F /* ofEvents.cpp in Sources */,
-				E4B5AE2012D94F9B00BA355D /* ofQuickTimeGrabber.cpp in Sources */,
 				E4F3BA6712F4C4BF002D19BB /* of3dUtils.cpp in Sources */,
 				E4F3BA6912F4C4BF002D19BB /* ofCamera.cpp in Sources */,
 				E4F3BA6B12F4C4BF002D19BB /* ofEasyCam.cpp in Sources */,
@@ -801,10 +779,6 @@
 				92C55F88132DA7DD00EC2631 /* ofPath.cpp in Sources */,
 				E4C5E388131AC1B10050F992 /* ofRtAudioSoundStream.cpp in Sources */,
 				772BDF73146928600030F0EE /* ofOpenALSoundPlayer.cpp in Sources */,
-				E703369415D4B03E009A3FDE /* ofQTKitGrabber.mm in Sources */,
-				E703369615D4B03E009A3FDE /* ofQTKitPlayer.mm in Sources */,
-				E42732AF15F10E7A00BBC533 /* ofQuickTimePlayer.cpp in Sources */,
-				FDFC9EF31600D70700EDD797 /* ofQTKitMovieRenderer.m in Sources */,
 				DAC22D3F16E7A4AF0020226D /* ofParameter.cpp in Sources */,
 				DAC22D4116E7A4AF0020226D /* ofParameterGroup.cpp in Sources */,
 				67D96B971651AF6D00D5242D /* ofGLUtils.cpp in Sources */,
@@ -860,7 +834,6 @@
 					"$(LIB_FMODEX)",
 				);
 				PRODUCT_NAME = openFrameworksDebug;
-				SDKROOT = macosx10.11;
 			};
 			name = Debug;
 		};
@@ -905,7 +878,6 @@
 					"$(LIB_FMODEX)",
 				);
 				PRODUCT_NAME = openFrameworks;
-				SDKROOT = macosx10.11;
 			};
 			name = Release;
 		};
@@ -920,7 +892,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OBJROOT = "$(SRCROOT)/../../lib/osx/build/debug/";
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -934,7 +906,7 @@
 				CONFIGURATION_TEMP_DIR = "$(SRCROOT)/../../lib/osx/build/release/";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OBJROOT = "$(SRCROOT)/../../lib/osx/build/release";
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
