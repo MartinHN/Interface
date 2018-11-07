@@ -200,7 +200,7 @@ void ScreenHandler::drawMask(){
 
     if(!invertMask)curCol.set(255);
     else curCol.set(0);
-    for (int i = 1 ; i < screenL.size();i++){
+    for (int i = 0 ; i < screenL.size();i++){
         if(screensCtl.getBool("mask"+ofToString(i))){
         ofPath tmpP;
             tmpP.setFillColor(curCol);

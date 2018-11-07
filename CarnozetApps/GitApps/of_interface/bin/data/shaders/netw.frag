@@ -19,66 +19,71 @@ uniform vec2  screen;
 
 uniform float k;
 uniform float l0;
+uniform float l0max;
 uniform float z;
 uniform int size;
 
 
-    
+
+
 void main(void){
-    vec2 st=gl_TexCoord[0].xy ;
+    vec2 st=gl_TexCoord[0].xy;
     vec3 vel = texture2DRect(tex0, st).xyz;
     vec3 pos = texture2DRect( posData, st).xyz;
-    
-        for(int i = 1 ; i<=size;i++){
-    
-    
-    
-    
-    
-    vec3 distbuf;
     float l0norm = l0/resolution;
-
-    float netmax = 100*l0norm;
-            
+    vec3 distbuf;
     float normbuf;
     vec3 linbuf;
-    linbuf.x=netmax+1;
-        
-    if(st.x<resolution-i-1){
-            distbuf=pos- texture2DRect( posData , st+vec2(i,0)).xyz;
+    float leftNormBuf;
+    float l0maxnorm;
+    if(l0max==0){
+        l0maxnorm = 9999;
+    }
+    else{
+        l0maxnorm = l0max/resolution;
+    }
+
+    for(int i = 1 ; i<=size;i++){
+
+
+
+        leftNormBuf = -1.0;
+        //        linbuf= vec3(l0max+1);
+
+        if(st.x<resolution-i){
+            vec3 poso = texture2DRect( posData , st+vec2(i,0)).xyz;
+            distbuf=pos-poso;
             linbuf=distbuf;
             normbuf = length(distbuf);
-            if(normbuf<netmax){
-            vel-=normalize(distbuf)*(normbuf-i*l0norm)*k;
+            leftNormBuf = normbuf;
+            if(normbuf>0 && normbuf<l0maxnorm){
+                vel-=normalize(distbuf)*(normbuf-i*l0norm)*k;
             }
         }
-    if(st.x>i+1){
-        distbuf=pos-texture2DRect( posData , st+vec2(-i,0)).xyz;
-        normbuf = length(distbuf);
-        
-        if(normbuf<netmax){
-            vel-=normalize(distbuf)*(normbuf-i*l0norm)*k;
-//            if(st.y<resolution-i){
-//               if(length(distbuf)<netmax){
-//                vel-=z*(distbuf+linbuf);
-//            }
-//            }
+        if(st.x>i){
+            vec3 opos = texture2DRect( posData , st+vec2(-i,0)).xyz;
+            distbuf=pos-opos;
+            normbuf = length(distbuf);
+
+            if(normbuf>0 && normbuf<l0maxnorm){
+                vel-=normalize(distbuf)*(normbuf-i*l0norm)*k;
+                //            if(st.y<resolution-1&&length(distbuf)<netmax){
+                //                vel-=z*(distbuf+linbuf);
+                //            }
+                if(leftNormBuf<l0maxnorm && leftNormBuf>=0){
+                    vel-=z*(distbuf+linbuf);
+                }
+            }
+
+
+
+
         }
-        
-        if(length(linbuf)<netmax){
-            vel-=z*(distbuf+linbuf);
-        }
-        
+
     }
-    
-    
-
 
     
-        }
-    
-
     
     gl_FragColor.xyz = vel;
-
+    
 }

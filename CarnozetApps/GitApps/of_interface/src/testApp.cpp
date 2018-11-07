@@ -123,6 +123,7 @@ void testApp::setup(){
     MYPARAM(alphablur, 255, 0, 255);
     MYPARAM(bloomsize,0,0,10);
     MYPARAM(isGloom,false,false,true);
+    MYPARAM(gloomSize,0,0,10);
     MYPARAM(invertColor,false,false,true);
     MYPARAM(isKaleidoscope,false,false,true);
     MYPARAM(kaleidoscopeScaleX,0.1,0.1,1);
@@ -321,7 +322,7 @@ void testApp::draw(){
 
         //Draw only for pipe
 
-        visuHandler.draw(1);
+        visuHandler.draw(DrawPass::DrawPipe);
 
 
 
@@ -384,7 +385,7 @@ void testApp::draw(){
     ofEnableAlphaBlending();
     camera2.begin();
     //draw reciever of pipe
-    visuHandler.draw(0);
+    visuHandler.draw(DrawPass::DrawFull);
 
     camera2.end();
     ofPopMatrix();
@@ -449,6 +450,7 @@ void testApp::draw(){
     if(isGloom){
         finalRender.dst->begin();
         gloom.begin();
+        gloom.setUniform1f("blurSize", gloomSize);
         finalRender.src->draw(0,0);
         gloom.end();
         finalRender.dst->end();
@@ -509,11 +511,14 @@ void testApp::draw(){
     cropScreen->w>0;
 
     if(oneMask){
+
+//        glBlendEquation(GL_MIN);
+//        glBlendFunc(GL_DST_COLOR,GL_ZERO);
 //        glBlendEquation(GL_FUNC_ADD);
 
 //        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-//        if(!sH.invertMask)ofSetColor(0);
-//        else
+        if(!sH.invertMask)ofSetColor(0);
+        else
             ofSetColor(255);
         ofRect(0, 0, scrw, scrh);
 
@@ -526,7 +531,7 @@ void testApp::draw(){
 
         if(!sH.invertMask)ofSetColor(255);
         else ofSetColor(0);
-        visuHandler.draw(2);
+        visuHandler.draw(DrawPass::DrawMask);
 
         sH.drawMask();
         glBlendEquation(GL_ADD);
@@ -544,7 +549,7 @@ void testApp::draw(){
             ofRect(scrw*(1-cropScreen->z),0,scrw*cropScreen->z,scrh);
         if(cropScreen->w)
             ofRect(0,scrh*(1-cropScreen->w),scrw,scrh*cropScreen->w);
-
+        
     }
     else{
         finalRender.src->draw(0,0,scrw,scrh);
@@ -599,6 +604,13 @@ void testApp::keyPressed(int key){
             gui.visuSettings++;
             gui.visuSettings %=2 ; // ignore screen
             break;
+        
+        case'2':
+        case '1':
+        case '0':
+            gui.visuSettings = key - '0';
+            break;
+
         case 'g':
             liveMode = !liveMode;
             ofSetWindowShape(liveMode?100:1000, liveMode?30:800);

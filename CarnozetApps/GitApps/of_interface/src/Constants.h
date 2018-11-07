@@ -143,7 +143,11 @@ static int FPS = 40;
 static int scrw = 1280;
 static int scrh = 800;
 
-
+typedef enum {
+    DrawFull,
+    DrawPipe,
+    DrawMask
+}DrawPass;
 static float calcAngle(ofVec2f cur, ofVec2f next){
     
     float teta;

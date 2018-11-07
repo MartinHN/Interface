@@ -147,6 +147,7 @@ public:
     ofParameter<string> loadName;
 
     ofParameter<bool> isGloom,invertColor,isKaleidoscope;
+    ofParameter<float>gloomSize;
     ofParameter<int> bloomsize,pipeAlphablur;
     
     ofParameter<bool> isPipe,hidePipe,pipeMask;

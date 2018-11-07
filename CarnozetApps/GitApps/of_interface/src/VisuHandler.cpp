@@ -131,7 +131,7 @@ void VisuHandler::setupData(){
     }
 }
 
-const void VisuHandler::draw(int mode){
+const void VisuHandler::draw(DrawPass mode){
     
     
     
@@ -143,11 +143,11 @@ const void VisuHandler::draw(int mode){
         
         if(!visuList[i]->isMasking){
             switch (mode){
-                case 0:
+                case DrawPass::DrawFull:
                     if(visuList[i]->isActive){isOk=true;}
                     break;
                     
-                case 1:
+                case DrawPass::DrawPipe:
                     if(visuList[i]->isPiping){ isOk=true;}
                     break;
                 default:
@@ -156,7 +156,7 @@ const void VisuHandler::draw(int mode){
             }      
             
         }
-        else if (mode == 2) {isOk=true;}
+        else if (mode == DrawPass::DrawMask) {isOk=true;}
         
         
         if(isOk){
@@ -164,9 +164,9 @@ const void VisuHandler::draw(int mode){
             ofPushView();
             ofPushStyle();
 
-            if(mode==0)ofTranslate(0,0,zdepth/2);
+            if(mode==DrawPass::DrawFull)ofTranslate(0,0,zdepth/2);
 
-            visuList[i]->isDrawingPipe = mode==1;
+            visuList[i]->drawMode = mode;
             int validScreen = sH->getValidScreen(visuList[i]->screenN);
             if(validScreen>=0){
                 if(mode!=2)ofEnableAlphaBlending();
@@ -228,7 +228,7 @@ const void VisuHandler::draw(int mode){
             ofPopMatrix();
         }
 
-        visuList[i]->isDrawingPipe = false;
+
         
     }
     

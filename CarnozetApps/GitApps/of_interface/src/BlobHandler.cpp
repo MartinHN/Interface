@@ -25,11 +25,11 @@ void BlobHandler::setupData(ofShader* blurXin,ofShader * blurYin){
     blurX=blurXin;
     blurY = blurYin;
     blobClient.setup();
-        blobClient.setApplicationName("kinectExample");
+//        blobClient.setApplicationName("kinectExample");
 //    blobClient.setApplicationName("kinectExampleDebug");
     //    blobClient.setServerName("blob");
     //    blobClient.setApplicationName("Simple Server");
-//    blobClient.setApplicationName("Arena");
+    blobClient.setApplicationName("Arena");
     //    blobClient.setServerName("");
 #if USE_ONE_CHANNEL
     syphonTex.allocate(inw,inh,GL_R8);
@@ -52,6 +52,7 @@ void BlobHandler::setupData(ofShader* blurXin,ofShader * blurYin){
 
 
 void BlobHandler::update(){
+    if(computeBlob){
     getSyphonTex();
     getGS();
 
@@ -60,6 +61,12 @@ void BlobHandler::update(){
     arms = compExtrems();
     centroids = compCentroid();
     boxes = compBounds();
+    }
+    else{
+        arms.clear();
+        centroids.clear();
+        boxes.clear();
+    }
 
 
     //    blurblob();
@@ -70,6 +77,7 @@ void BlobHandler::registerParams(){
     settings.setName("blobsettings");
 
     MYPARAM(isPiping,false,false,true);
+    MYPARAM(computeBlob,true,false,true);
     MYPARAM(vidThreshold, 70.f, 0.f, 255.f);
     MYPARAM(invertBW,true,false,true);
     MYPARAM(minSide,0.f,0.f,1.f);

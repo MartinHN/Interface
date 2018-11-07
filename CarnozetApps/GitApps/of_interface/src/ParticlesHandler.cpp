@@ -150,12 +150,14 @@ void Particles::setup(){
     forces.push_back(new Force("netw"));
     forces[forces.size()-1]->addParameter("k",.030f,0.f,.2f);
     forces[forces.size()-1]->addParameter("l0",1.0f,0.f,20.0f);
+    forces[forces.size()-1]->addParameter("l0max",1.0f,0.f,20.0f);
     forces[forces.size()-1]->addParameter("z",.0f,0.f,2.f);
     forces[forces.size()-1]->addParameter("size",2,1,10);
     
     forces.push_back(new Force("neth"));
     forces[forces.size()-1]->addParameter("k",.030f,0.f,.2f);
     forces[forces.size()-1]->addParameter("l0",1.0f,0.f,20.f);
+    forces[forces.size()-1]->addParameter("l0max",1.0f,0.f,20.0f);
     forces[forces.size()-1]->addParameter("z",.0f,0.f,2.f);
     forces[forces.size()-1]->addParameter("size",2,1,10);
     

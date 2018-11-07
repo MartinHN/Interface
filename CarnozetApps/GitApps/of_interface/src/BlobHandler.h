@@ -77,7 +77,7 @@ public:
     ofParameterGroup settings;
     ofParameter<float> minSide, maxSide,maxLengthExtrem,maxArmWidth;
     ofParameter<int> maxBlobs,polyMaxPoints;
-    ofParameter<bool> findHoles,invertBW,invertX,invertY;
+    ofParameter<bool> computeBlob,findHoles,invertBW,invertX,invertY;
     ofParameter<float> simplification,smooth;
     ofParameter<ofVec4f> crop;
     ofParameter<int> screenN;

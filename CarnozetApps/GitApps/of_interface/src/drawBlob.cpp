@@ -47,7 +47,7 @@ void drawBlob::draw(int w, int h){
     
     ofTranslate(w*(realPos.x-scale->x/2.),h*(realPos.y-scale->y/2.), (realPos.z-0.5)*dad->zdepth);
     auto col =ofColor(color->x,color->y,color->z,alphaColor);
-    if(isDrawingPipe){
+    if(drawMode = DrawPass::DrawPipe){
         col.set(255,255,255,alphaColor); // draw white in pipe
     }
     for(int i  = 0 ; i< paths.size();i++){

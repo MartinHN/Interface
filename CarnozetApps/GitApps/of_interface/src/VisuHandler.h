@@ -46,7 +46,7 @@ public:
     void setup(AttrCtl *attrctl,BlobHandler* bHin,int inw,int inh,int zdepthin,int * scrw,int * scrh,ScreenHandler * sH);
     void update();
     void updateHighFPS();
-    const void draw(int mode);
+    const void draw(DrawPass mode);
     void setupData();
     void registerParams();
     void saveState(string & s);
