@@ -347,10 +347,6 @@
 		F20CC4501885C66F00FDBDC2 /* Ecrans.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20CC44E1885C66F00FDBDC2 /* Ecrans.cpp */; };
 		F20CC45D1885D73E00FDBDC2 /* VisuClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20CC45B1885D73E00FDBDC2 /* VisuClass.cpp */; };
 		F20CC4631885DBD600FDBDC2 /* Baton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20CC4611885DBD600FDBDC2 /* Baton.cpp */; };
-		F213706718C5490E00F2195A /* VideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F213706518C5490E00F2195A /* VideoPlayer.cpp */; };
-		F213706818C5490E00F2195A /* VideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F213706518C5490E00F2195A /* VideoPlayer.cpp */; };
-		F213706918C5490E00F2195A /* VideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F213706518C5490E00F2195A /* VideoPlayer.cpp */; };
-		F213706A18C5490E00F2195A /* VideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F213706518C5490E00F2195A /* VideoPlayer.cpp */; };
 		F220C7B418A65D1900B8EA9F /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F220C7B218A65D1900B8EA9F /* Gui.cpp */; };
 		F22359F517C15D2800895AA8 /* Ruban.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F22359F317C15D2800895AA8 /* Ruban.cpp */; };
 		F242ACAE18A05DAD0091E2EF /* boule2gomme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F242ACAD18A05DAC0091E2EF /* boule2gomme.cpp */; };
@@ -2072,7 +2068,6 @@
 				F2901AF718C22C9600B2D50E /* Balls.cpp in Sources */,
 				F2901AFB18C22C9600B2D50E /* CircleLine.cpp in Sources */,
 				F2F8117B18C3734700965B1B /* drawBlob.cpp in Sources */,
-				F213706918C5490E00F2195A /* VideoPlayer.cpp in Sources */,
 				F2D9F4C718CEF43800AF24BA /* Liner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2173,7 +2168,6 @@
 				F2901AF618C22C9600B2D50E /* Balls.cpp in Sources */,
 				F2901AFA18C22C9600B2D50E /* CircleLine.cpp in Sources */,
 				F2F8117A18C3734700965B1B /* drawBlob.cpp in Sources */,
-				F213706818C5490E00F2195A /* VideoPlayer.cpp in Sources */,
 				F2D9F4C618CEF43800AF24BA /* Liner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2250,7 +2244,6 @@
 				F2901AF518C22C9600B2D50E /* Balls.cpp in Sources */,
 				F2901AF918C22C9600B2D50E /* CircleLine.cpp in Sources */,
 				F2F8117918C3734700965B1B /* drawBlob.cpp in Sources */,
-				F213706718C5490E00F2195A /* VideoPlayer.cpp in Sources */,
 				F2D9F4C518CEF43800AF24BA /* Liner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2326,7 +2319,6 @@
 				F2901AF818C22C9600B2D50E /* Balls.cpp in Sources */,
 				F2901AFC18C22C9600B2D50E /* CircleLine.cpp in Sources */,
 				F2F8117C18C3734700965B1B /* drawBlob.cpp in Sources */,
-				F213706A18C5490E00F2195A /* VideoPlayer.cpp in Sources */,
 				F2D9F4C818CEF43800AF24BA /* Liner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2452,7 +2444,6 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "MurMur d'Ombre 10.9 copy";
-				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2551,7 +2542,6 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "MurMur d'Ombre 10.9 copy";
-				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2649,7 +2639,6 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				PRODUCT_NAME = "MurMur d'Ombre 10.9";
-				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2746,7 +2735,6 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				PRODUCT_NAME = "MurMur d'Ombre 10.9";
-				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2830,7 +2818,7 @@
 					"$(OF_CORE_LIBS)",
 					../../../addons/ofxOpenCv/libs/opencv/lib/osx/opencv.a,
 				);
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -2914,7 +2902,7 @@
 					"$(OF_CORE_LIBS)",
 					../../../addons/ofxOpenCv/libs/opencv/lib/osx/opencv.a,
 				);
-				SDKROOT = macosx10.11;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -3008,7 +2996,6 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				PRODUCT_NAME = "MurMur d'OmbreDebug";
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3102,7 +3089,6 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				PRODUCT_NAME = "MurMur d'Ombre";
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3201,7 +3187,6 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "MurMur d'Ombre 10.6 copy";
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3299,7 +3284,6 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "MurMur d'Ombre 10.6 copy";
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

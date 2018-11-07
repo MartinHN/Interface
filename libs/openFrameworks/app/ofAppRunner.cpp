@@ -23,7 +23,7 @@
 // TODO: closing seems wonky.
 // adding this for vc2010 compile: error C3861: 'closeQuicktime': identifier not found
 #if defined (TARGET_WIN32) || defined(TARGET_OSX)
-	#include "ofQtUtils.h"
+//	#include "ofQtUtils.h"
 #endif
 
 //========================================================================
