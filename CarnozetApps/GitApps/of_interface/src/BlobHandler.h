@@ -32,6 +32,7 @@ public:
     void getGS();
     void compBlob();
     void registerParams();
+    vector<ofAbstractParameter *> getGlobalParams();
     void compCache();
     void setupData(ofShader* blurXin,ofShader * blurYin);
     vector<ofVec3f> compCentroid(float w=1,float h=1);

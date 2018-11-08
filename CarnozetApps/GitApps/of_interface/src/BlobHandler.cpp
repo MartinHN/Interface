@@ -97,6 +97,10 @@ void BlobHandler::registerParams(){
     MYPARAM(crop, ofVec4f(0),ofVec4f(0),ofVec4f(100));
 }
 
+vector<ofAbstractParameter *> BlobHandler::getGlobalParams(){
+    
+}
+
 //
 //
 //void BlobHandler::computePoly(){

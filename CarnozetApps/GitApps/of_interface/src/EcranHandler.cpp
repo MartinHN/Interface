@@ -20,9 +20,13 @@ screensParam.setName("screens");
     
 }
 
+void ScreenHandler::setupUI(){
+    screenPreset.addListener(this, &ScreenHandler::loadNewPos);
+    save.addListener(this, &ScreenHandler::saveP);
+}
+
 void ScreenHandler::setupData(){
-        screenPreset.addListener(this, &ScreenHandler::loadNewPos);
-        save.addListener(this, &ScreenHandler::saveP);
+
 #ifdef LIVEBLUR
     blurX.load("","shaders/blurXa.frag");
     blurY.load("","shaders/blurYa.frag");
@@ -254,9 +258,9 @@ void ScreenHandler::loadNewPos(int & num){
 void ScreenHandler::saveP(bool & s){
     if(s){
         
-        ofFileDialogResult filep = ofSystemSaveDialog("pecrans0.xml","save screen preset");
+//        ofFileDialogResult filep = ofSystemSaveDialog("pecrans0.xml","save screen preset");
         
-        string abspath =filep.getPath();// ofToDataPath("Xml/pecrans"+ofToString(screenPreset)+".xml");
+        string abspath = ofToDataPath("Xml/pecrans"+ofToString(screenPreset)+".xml");
         ofLogWarning("saving screen local : " + abspath);
         ofXml xml;
         

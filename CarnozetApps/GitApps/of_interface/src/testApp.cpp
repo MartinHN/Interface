@@ -188,7 +188,7 @@ void testApp::setup(){
     paramSync2->setup(globalParam,VISU_OSC_IN2,"localhost",VISU_OSC_OUT2);
     clientServerReceiver = new ofxOscReceiver();
     clientServerReceiver->setup(SERVER_PORT);
-
+    sH.setupUI();
 #else
     visuHandler.setupData();
     bH.setupData(&blurX,&blurY);

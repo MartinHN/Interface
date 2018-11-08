@@ -1528,7 +1528,7 @@
           "id": "panel_1",
           "linkId": "",
           "width": "100%",
-          "height": "100%",
+          "height": "90%",
           "label": false,
           "color": "auto",
           "css": "",
@@ -1773,6 +1773,26 @@
               "scroll": true
             }
           ]
+        },
+        {
+          "type": "push",
+          "top": 500,
+          "left": 0,
+          "id": "saveMapping",
+          "linkId": "",
+          "width": "auto",
+          "height": "auto",
+          "label": "auto",
+          "color": "auto",
+          "css": "",
+          "on": 1,
+          "off": 0,
+          "norelease": false,
+          "precision": 0,
+          "address": "/OF/screensCtl/save",
+          "preArgs": "",
+          "target": "",
+          "bypass": false
         }
       ],
       "tabs": [],
@@ -1793,7 +1813,82 @@
       "target": "",
       "bypass": false,
       "variables": "@{parent.variables}",
-      "widgets": [],
+      "widgets": [
+        {
+          "type": "xy",
+          "top": 0,
+          "left": 0,
+          "id": "zone1xy",
+          "linkId": "",
+          "width": "100%",
+          "height": "50%",
+          "label": false,
+          "color": "auto",
+          "css": "",
+          "pointSize": 20,
+          "snap": false,
+          "spring": false,
+          "pips": true,
+          "rangeX": {
+            "min": 0,
+            "max": 0.5
+          },
+          "rangeY": {
+            "min": 0.5,
+            "max": 0
+          },
+          "logScaleX": false,
+          "logScaleY": false,
+          "input": true,
+          "doubleTap": false,
+          "default": "",
+          "value": "",
+          "precision": 2,
+          "address": "/zone1xy",
+          "preArgs": "",
+          "target": "",
+          "bypass": true,
+          "touchAddress": "",
+          "split": false
+        },
+        {
+          "type": "xy",
+          "top": "50%",
+          "left": "0%",
+          "id": "zoneFamily1",
+          "linkId": "",
+          "width": "100%",
+          "height": "50%",
+          "label": false,
+          "color": "auto",
+          "css": "",
+          "pointSize": 20,
+          "snap": false,
+          "spring": false,
+          "pips": true,
+          "rangeX": {
+            "min": 0.2,
+            "max": 1
+          },
+          "rangeY": {
+            "min": 1,
+            "max": 0.2
+          },
+          "logScaleX": false,
+          "logScaleY": false,
+          "input": true,
+          "doubleTap": false,
+          "default": "",
+          "value": "",
+          "precision": 2,
+          "address": "/OF/attrCtl/zonefamilly1",
+          "preArgs": "@{zone1xy}",
+          "target": "",
+          "bypass": false,
+          "touchAddress": "",
+          "split": false
+        }
+      ],
       "tabs": [],
       "scroll": true
     }
