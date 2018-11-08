@@ -2,7 +2,7 @@
 #extension GL_ARB_texture_rectangle : enable
 #extension GL_EXT_gpu_shader4 : enable
 //#define KERNEL_SIZE 9
-#define GL_FRAGMENT_PRECISION_HIGH 1
+//#define GL_FRAGMENT_PRECISION_HIGH 1
 //#define Debugmode
 
 

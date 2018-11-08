@@ -17,7 +17,7 @@ Ecran::Ecran(int number,vector<ofVec3f> vert,int * scrwin, int * scrhin,bool isB
     for (int i = 0 ; i < vert.size();i++){
          
         vl.push_back(new ofParameter<ofVec3f>());
-        if(isBlob) vl.back()->set(vert[i]/ofVec2f(320,240));
+        if(isBlob) vl.back()->set(vert[i]/ofVec2f(SYPHON_W,SYPHON_H));
         else vl.back()->set(vert[i]);
         vl.back()->setName("p"+ofToString(i));
         vl.back()->setMin(ofVec3f(0));

@@ -1,6 +1,6 @@
 #version 120
 #extension GL_ARB_texture_rectangle : enable
-#define GL_FRAGMENT_PRECISION_HIGH 1
+//#define GL_FRAGMENT_PRECISION_HIGH 1
 
 // This fill the billboard made on the Geometry Shader with a texture
 

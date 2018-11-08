@@ -137,7 +137,7 @@ class Timer{
 
 static int computeRatio = 1;
 
-static int FPS = 40;
+static int FPS = 60;
 // screen size
 
 static int scrw = 1280;
