@@ -229,6 +229,20 @@ void ofApp::openCloseKinnect(bool & b){
     }
 }
 
+#define SENDVEC(add,v) {  \
+auto fb = ofxOscMessage();\
+fb.setAddress(add);     \
+fb.addFloatArg(v.get().x); \
+fb.addFloatArg(v.get().y);\
+fbOsc.sendMessage(fb);\
+}
+#define SENDFLOAT(add,f) {  \
+auto fb = ofxOscMessage();\
+fb.setAddress(add);     \
+fb.addFloatArg(f); \
+fbOsc.sendMessage(fb);\
+}
+
 void ofApp::updateOSC(){
     if(osc.hasWaitingMessages()){
         ofxOscMessage m;
@@ -238,6 +252,17 @@ void ofApp::updateOSC(){
             else if(m.getAddress()=="/p3"){calib.p3 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
             else if(m.getAddress()=="/p4"){calib.p4 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
             else if(m.getAddress()=="/tilt"){angle = m.getArgAsFloat(0);}
+            else if(m.getAddress()=="/save"){kinectCtrl.saveToFile(settingFile);}
+            else if(m.getAddress()=="/get"){
+                
+                fbOsc.setup(m.getAddress(),m.getRemotePort());
+                SENDVEC("/p1", calib.p1)
+                SENDVEC("/p2", calib.p2)
+                SENDVEC("/p3", calib.p3)
+                SENDVEC("/p4", calib.p4)
+                SENDFLOAT("/tilt",angle )
+                
+            }
 
         }
     }

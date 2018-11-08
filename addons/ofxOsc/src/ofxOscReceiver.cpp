@@ -29,84 +29,84 @@
 #include "ofxOscReceiver.h"
 
 #ifndef TARGET_WIN32
-        #include <pthread.h>
+#include <pthread.h>
 #endif
 #include <iostream>
 #include <assert.h>
 
 ofxOscReceiver::ofxOscReceiver()
 {
-	listen_socket = NULL;
+    listen_socket = NULL;
     currentParameterSet = NULL;
 }
 
 void ofxOscReceiver::setup( int listen_port )
 {
-	// if we're already running, shutdown before running again
-	if ( listen_socket )
-		shutdown();
-	
-	// create the mutex
-	#ifdef TARGET_WIN32
-	mutex = CreateMutexA( NULL, FALSE, NULL );
-	#else
-	pthread_mutex_init( &mutex, NULL );
-	#endif
-	
-	// create socket
-	socketHasShutdown = false;
-	listen_socket = new UdpListeningReceiveSocket( IpEndpointName( IpEndpointName::ANY_ADDRESS, listen_port ), this );
-
-	// start thread
-	#ifdef TARGET_WIN32
-	thread	= CreateThread(
-							   NULL,              // default security attributes
-							   0,                 // use default stack size
-							&ofxOscReceiver::startThread,        // thread function
-							   (void*)this,             // argument to thread function
-							   0,                 // use default creation flags
-							   NULL);             // we don't the the thread id
-
-	#else
-	pthread_create( &thread, NULL, &ofxOscReceiver::startThread, (void*)this );
-	#endif
+    // if we're already running, shutdown before running again
+    if ( listen_socket )
+        shutdown();
+    
+    // create the mutex
+#ifdef TARGET_WIN32
+    mutex = CreateMutexA( NULL, FALSE, NULL );
+#else
+    pthread_mutex_init( &mutex, NULL );
+#endif
+    
+    // create socket
+    socketHasShutdown = false;
+    listen_socket = new UdpListeningReceiveSocket( IpEndpointName( IpEndpointName::ANY_ADDRESS, listen_port ), this );
+    
+    // start thread
+#ifdef TARGET_WIN32
+    thread	= CreateThread(
+                           NULL,              // default security attributes
+                           0,                 // use default stack size
+                           &ofxOscReceiver::startThread,        // thread function
+                           (void*)this,             // argument to thread function
+                           0,                 // use default creation flags
+                           NULL);             // we don't the the thread id
+    
+#else
+    pthread_create( &thread, NULL, &ofxOscReceiver::startThread, (void*)this );
+#endif
 }
 
 void ofxOscReceiver::shutdown()
 {
-	if ( listen_socket )
-	{
-		// tell the socket to shutdown
-		listen_socket->AsynchronousBreak();
-		// wait for shutdown to complete
-		while (!socketHasShutdown)
-		{
-			#ifdef TARGET_WIN32
-			Sleep(1);
-			#else
-			// sleep 0.1ms
-			usleep(100);
-			#endif
-		}
-		
-		// thread will clean up itself
-		
-		// clean up the mutex
-		#ifdef TARGET_WIN32
-		ReleaseMutex( mutex );
-		#else
-		pthread_mutex_destroy( &mutex );	
-		#endif
-		
-		// delete the socket
-		delete listen_socket;
-		listen_socket = NULL;
-	}
+    if ( listen_socket )
+    {
+        // tell the socket to shutdown
+        listen_socket->AsynchronousBreak();
+        // wait for shutdown to complete
+        while (!socketHasShutdown)
+        {
+#ifdef TARGET_WIN32
+            Sleep(1);
+#else
+            // sleep 0.1ms
+            usleep(100);
+#endif
+        }
+        
+        // thread will clean up itself
+        
+        // clean up the mutex
+#ifdef TARGET_WIN32
+        ReleaseMutex( mutex );
+#else
+        pthread_mutex_destroy( &mutex );
+#endif
+        
+        // delete the socket
+        delete listen_socket;
+        listen_socket = NULL;
+    }
 }
 
 ofxOscReceiver::~ofxOscReceiver()
 {
-	shutdown();
+    shutdown();
 }
 
 #ifdef TARGET_WIN32
@@ -117,139 +117,139 @@ void*
 
 ofxOscReceiver::startThread( void* receiverInstance )
 {
-	// cast the instance
-	ofxOscReceiver* instance = (ofxOscReceiver*)receiverInstance;
-	// start the socket listener
-	instance->listen_socket->Run();
-	// socket listener has finished - remember this fact
-	instance->socketHasShutdown = true;
-	// return
-    #ifdef TARGET_WIN32
-	return 0;
-    #else
-	return NULL;
-    #endif
+    // cast the instance
+    ofxOscReceiver* instance = (ofxOscReceiver*)receiverInstance;
+    // start the socket listener
+    instance->listen_socket->Run();
+    // socket listener has finished - remember this fact
+    instance->socketHasShutdown = true;
+    // return
+#ifdef TARGET_WIN32
+    return 0;
+#else
+    return NULL;
+#endif
 }
 
 void ofxOscReceiver::ProcessMessage( const osc::ReceivedMessage &m, const IpEndpointName& remoteEndpoint )
 {
-	// convert the message to an ofxOscMessage
-	ofxOscMessage* ofMessage = new ofxOscMessage();
-
-	// set the address
-	ofMessage->setAddress( m.AddressPattern() );
-
-	// set the sender ip/host
-	char endpoint_host[ IpEndpointName::ADDRESS_STRING_LENGTH ];
-	remoteEndpoint.AddressAsString( endpoint_host );
+    // convert the message to an ofxOscMessage
+    ofxOscMessage* ofMessage = new ofxOscMessage();
+    
+    // set the address
+    ofMessage->setAddress( m.AddressPattern() );
+    
+    // set the sender ip/host
+    char endpoint_host[ IpEndpointName::ADDRESS_STRING_LENGTH ];
+    remoteEndpoint.AddressAsString( endpoint_host );
     ofMessage->setRemoteEndpoint( endpoint_host, remoteEndpoint.port );
-
-	// transfer the arguments
-	for ( osc::ReceivedMessage::const_iterator arg = m.ArgumentsBegin();
-		  arg != m.ArgumentsEnd();
-		  ++arg )
-	{
-		if ( arg->IsInt32() )
-			ofMessage->addIntArg( arg->AsInt32Unchecked() );
-		else if ( arg->IsInt64() )
-			ofMessage->addInt64Arg( arg->AsInt64Unchecked() );
-		else if ( arg->IsFloat() )
-			ofMessage->addFloatArg( arg->AsFloatUnchecked() );
-		else if ( arg->IsString() )
-			ofMessage->addStringArg( arg->AsStringUnchecked() );
-		else
-		{
-			ofLogError("ofxOscReceiver") << "ProcessMessage: argument in message " << m.AddressPattern() << " is not an int, float, or string";
-		}
-	}
-
-	// now add to the queue
-
-	// at this point we are running inside the thread created by startThread,
-	// so anyone who calls hasWaitingMessages() or getNextMessage() is coming
-	// from a different thread
-
-	// so we have to practise shared memory management
-
-	// grab a lock on the queue
-	grabMutex();
-
-	// add incoming message on to the queue
-	messages.push_back( ofMessage );
-
-	// release the lock
-	releaseMutex();
+    
+    // transfer the arguments
+    for ( osc::ReceivedMessage::const_iterator arg = m.ArgumentsBegin();
+         arg != m.ArgumentsEnd();
+         ++arg )
+    {
+        if ( arg->IsInt32() )
+            ofMessage->addIntArg( arg->AsInt32Unchecked() );
+        else if ( arg->IsInt64() )
+            ofMessage->addInt64Arg( arg->AsInt64Unchecked() );
+        else if ( arg->IsFloat() )
+            ofMessage->addFloatArg( arg->AsFloatUnchecked() );
+        else if ( arg->IsString() )
+            ofMessage->addStringArg( arg->AsStringUnchecked() );
+        else
+        {
+            ofLogError("ofxOscReceiver") << "ProcessMessage: argument in message " << m.AddressPattern() << " is not an int, float, or string";
+        }
+    }
+    
+    // now add to the queue
+    
+    // at this point we are running inside the thread created by startThread,
+    // so anyone who calls hasWaitingMessages() or getNextMessage() is coming
+    // from a different thread
+    
+    // so we have to practise shared memory management
+    
+    // grab a lock on the queue
+    grabMutex();
+    
+    // add incoming message on to the queue
+    messages.push_back( ofMessage );
+    
+    // release the lock
+    releaseMutex();
 }
 
 bool ofxOscReceiver::hasWaitingMessages()
 {
-	// grab a lock on the queue
-	grabMutex();
-
-	// check the length of the queue
-	int queue_length = (int)messages.size();
-
-	// release the lock
-	releaseMutex();
-
-	// return whether we have any messages
-	return queue_length > 0;
+    // grab a lock on the queue
+    grabMutex();
+    
+    // check the length of the queue
+    int queue_length = (int)messages.size();
+    
+    // release the lock
+    releaseMutex();
+    
+    // return whether we have any messages
+    return queue_length > 0;
 }
 
 bool ofxOscReceiver::getNextMessage( ofxOscMessage* message )
 {
-	// grab a lock on the queue
-	grabMutex();
-
-	// check if there are any to be got
-	if ( messages.size() == 0 )
-	{
-		// no: release the mutex
-		releaseMutex();
-		return false;
-	}
-
-	// copy the message from the queue to message
-	ofxOscMessage* src_message = messages.front();
-	message->copy( *src_message );
-
-	// now delete the src message
-	delete src_message;
-	// and remove it from the queue
-	messages.pop_front();
-
-	// release the lock on the queue
-	releaseMutex();
-
-	// return success
-	return true;
+    // grab a lock on the queue
+    grabMutex();
+    
+    // check if there are any to be got
+    if ( messages.size() == 0 )
+    {
+        // no: release the mutex
+        releaseMutex();
+        return false;
+    }
+    
+    // copy the message from the queue to message
+    ofxOscMessage* src_message = messages.front();
+    message->copy( *src_message );
+    
+    // now delete the src message
+    delete src_message;
+    // and remove it from the queue
+    messages.pop_front();
+    
+    // release the lock on the queue
+    releaseMutex();
+    
+    // return success
+    return true;
 }
 
 bool ofxOscReceiver::getParameter(ofAbstractParameter & parameter){
-	ofxOscMessage msg;
-	if ( messages.size() == 0 ) return false;
-	while(hasWaitingMessages()){
+    ofxOscMessage msg;
+    if ( messages.size() == 0 ) return false;
+    while(hasWaitingMessages()){
         currentParameterSet = NULL;
-		ofAbstractParameter * p = &parameter;
-		getNextMessage(&msg);
-		vector<string> address = ofSplitString(msg.getAddress(),"/",true);
-		for(int i=0;i<address.size();i++){
+        ofAbstractParameter * p = &parameter;
+        getNextMessage(&msg);
+        vector<string> address = ofSplitString(msg.getAddress(),"/",true);
+        for(int i=0;i<address.size();i++){
             
-//            cout<<p->getName()<<endl;
-			if(address[i]==p->getName()){
-				if(p->type()==typeid(ofParameterGroup).name()){
-					if(address.size()>i+1){
+            //            cout<<p->getName()<<endl;
+            if(address[i]==p->getName()){
+                if(p->type()==typeid(ofParameterGroup).name()){
+                    if(address.size()>i+1){
                         if(static_cast<ofParameterGroup*>(p)->contains(address[i+1]))
-                            { p = &static_cast<ofParameterGroup*>(p)->get(address[i+1]);}
-                        else 
-                            {cout<<"wrong oscmessage";
-                                for(auto & a:address){
-                                    cout<<" " << a;
-                                }
-                                cout << endl;
-                            return false;} 
-					}
-				}
+                        { p = &static_cast<ofParameterGroup*>(p)->get(address[i+1]);}
+                        else
+                        {cout<<"wrong oscmessage";
+                            for(auto & a:address){
+                                cout<<" " << a;
+                            }
+                            cout << endl;
+                            return false;}
+                    }
+                }
                 else if(p->type()==typeid(ofParameter<ofVec4f>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT ){
                     if(msg.getNumArgs()!=4){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
                     else{
@@ -262,75 +262,78 @@ bool ofxOscReceiver::getParameter(ofAbstractParameter & parameter){
                     }
                 }
                 else if(p->type()==typeid(ofParameter<ofVec3f>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT ){
-                    if(msg.getNumArgs()!=3){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
+                    if(!(msg.getNumArgs()==3 || msg.getNumArgs()==2)){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
                     else{
                         currentParameterSet = p;
-                    ofVec3f vt;
-                    for(int i  = 0 ; i < 3 ; i++){
-					vt[i] = msg.getArgAsFloat(i);
+                        ofVec3f vt;
+                        vt.z = p->cast<ofVec3f>().get().z;
+                        for(int i  = 0 ; i < msg.getNumArgs(); i++){
+                            vt[i] = msg.getArgAsFloat(i);
+                        }
+                        (p->cast<ofVec3f>())=vt;
+                        
                     }
-                    (p->cast<ofVec3f>())=vt;
-                    }
+                    
                 }
                 
                 else if(p->type()==typeid(ofParameter<ofVec2f>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT){
                     if(msg.getNumArgs()!=2){ofLogWarning("recieving wrong vector size : "+p->getName()+" with "+ ofToString(msg.getNumArgs())+" values");}
                     else{
                         currentParameterSet = p;
-                    ofVec2f vt;
-                    for(int i  = 0 ; i < 2 ; i++){
-                        vt[i] = msg.getArgAsFloat(i);
+                        ofVec2f vt;
+                        for(int i  = 0 ; i < 2 ; i++){
+                            vt[i] = msg.getArgAsFloat(i);
+                        }
+                        (p->cast<ofVec2f>())=vt;
                     }
-                    (p->cast<ofVec2f>())=vt;
-                }
                 }
                 
                 
                 
                 else if(p->type()==typeid(ofParameter<int>).name() && msg.getArgType(0)==OFXOSC_TYPE_INT32){
                     currentParameterSet = p;
-					p->cast<int>() = msg.getArgAsInt32(0);
-				}else if(p->type()==typeid(ofParameter<float>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT){
+                    p->cast<int>() = msg.getArgAsInt32(0);
+                }else if(p->type()==typeid(ofParameter<float>).name() && msg.getArgType(0)==OFXOSC_TYPE_FLOAT){
                     currentParameterSet = p;
-					p->cast<float>() = msg.getArgAsFloat(0);
-				}else if(p->type()==typeid(ofParameter<bool>).name() && msg.getArgType(0)==OFXOSC_TYPE_INT32){
+                    p->cast<float>() = msg.getArgAsFloat(0);
+                }else if(p->type()==typeid(ofParameter<bool>).name() && msg.getArgType(0)==OFXOSC_TYPE_INT32){
                     currentParameterSet = p;
-					p->cast<bool>() = msg.getArgAsInt32(0);
-				}else if(p->type()==typeid(ofParameter<string>).name() && msg.getArgType(0)==OFXOSC_TYPE_STRING){
+                    p->cast<bool>() = msg.getArgAsInt32(0);
+                }else if(p->type()==typeid(ofParameter<string>).name() && msg.getArgType(0)==OFXOSC_TYPE_STRING){
                     currentParameterSet = p;
-					p->cast<string>() = msg.getArgAsString(0);
-				}
-
+                    p->cast<string>() = msg.getArgAsString(0);
+                }
+                
                 
                 else if(msg.getArgType(0)==OFXOSC_TYPE_STRING){
                     currentParameterSet = p;
-					p->fromString(msg.getArgAsString(0));
-				}
+                    p->fromString(msg.getArgAsString(0));
+                }
                 else{
                     ofLogWarning("wrong format for message : "+msg.getAddress());
                 }
-			}
             }
-            
-            
-	}
-	return true;
+        }
+        
+        
+    }
+    return true;
 }
 
 void ofxOscReceiver::grabMutex()
 {
 #ifdef TARGET_WIN32
-	WaitForSingleObject( mutex, INFINITE );
+    WaitForSingleObject( mutex, INFINITE );
 #else
-	pthread_mutex_lock( &mutex );
+    pthread_mutex_lock( &mutex );
 #endif
 }
 
 void ofxOscReceiver::releaseMutex()
 {
 #ifdef TARGET_WIN32
-	ReleaseMutex( mutex );
+    ReleaseMutex( mutex );
 #else
-	pthread_mutex_unlock( &mutex );
+    pthread_mutex_unlock( &mutex );
 #endif
 }

@@ -31,6 +31,7 @@ public:
     ofxKinect kinect;
 
     ofxOscReceiver osc;
+    ofxOscSender fbOsc;
     ofxCvColorImage colorImg;
 
     ofxCvGrayscaleImage grayImage; // grayscale depth image
