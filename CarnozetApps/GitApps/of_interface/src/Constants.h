@@ -21,8 +21,8 @@
 
 #define VISU_OSC_IP_OUT "localhost"
 
-#define SYPHON_W 640/2
-#define SYPHON_H 480/2
+#define SYPHON_W 640
+#define SYPHON_H 480
 #define PIPE_W SYPHON_W
 #define PIPE_H SYPHON_H
 

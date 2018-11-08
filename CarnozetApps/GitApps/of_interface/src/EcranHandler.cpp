@@ -126,7 +126,8 @@ void ScreenHandler::registerParams(){
     for (int i = 0 ; i < screenL.size() ; i ++ ){
         ofParameter<bool> mask;
         mask.setName("mask"+ofToString(i));
-        mask = false;
+        mask = i==0;
+        mask.setSerializable(false);
         screensCtl.add(mask);
     }
     

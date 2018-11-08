@@ -19,7 +19,7 @@ public:
     boule2gomme(VisuHandler * v);
     ~boule2gomme(){};
     
-    ofParameter<bool> drawZones,drawSyphon,drawPipe,drawAttr;
+    ofParameter<bool> drawZones,drawSyphon,drawPipe,drawAttr,drawGSBlob;
 
     
     void draw(int w, int h);

@@ -51,6 +51,7 @@ void ofApp::setup() {
     P(angle,0,-30,30);
     angle.addListener(this, &ofApp::setTilt);
     PB(isOpen,true);
+    P(calib.alphaBlur,255,0,255);
     isOpen.setSerializable(false);
     isOpen.addListener(this,&ofApp::openCloseKinnect);
     settings.add(calib.settings);
@@ -78,7 +79,7 @@ void ofApp::update() {
     // there is a new frame and we are connected
     if(kinect.isFrameNewDepth()) {
         calib.computeOnTexture(kinect.getDepthTextureReference(),true);
-
+        
         // load grayscale depth image from the kinect source
         grayImage.setFromPixels(calib.pixels);
 //        grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
@@ -94,16 +95,16 @@ void ofApp::update() {
         } else {
 
             // or we do it ourselves - show people how they can work with the pixels
-            unsigned char * pix = grayImage.getPixels();
-
-            int numPixels = grayImage.getWidth() * grayImage.getHeight();
-            for(int i = 0; i < numPixels; i++) {
-                if(pix[i] < nearThreshold && pix[i] > farThreshold) {
-                    pix[i] = 255;
-                } else {
-                    pix[i] = 0;
-                }
-            }
+//            unsigned char * pix = grayImage.getPixels();
+//
+//            int numPixels = grayImage.getWidth() * grayImage.getHeight();
+//            for(int i = 0; i < numPixels; i++) {
+//                if(pix[i] < nearThreshold && pix[i] > farThreshold) {
+//                    pix[i] = 255;
+//                } else {
+//                    pix[i] = 0;
+//                }
+//            }
         }
 
         // update the cv images
@@ -251,6 +252,9 @@ void ofApp::updateOSC(){
             else if(m.getAddress()=="/p2"){calib.p2 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
             else if(m.getAddress()=="/p3"){calib.p3 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
             else if(m.getAddress()=="/p4"){calib.p4 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
+            else if(m.getAddress()=="/near"){nearThreshold = m.getArgAsFloat(0);}
+            else if(m.getAddress()=="/far"){farThreshold = m.getArgAsFloat(0);}
+            else if(m.getAddress()=="/p4"){calib.p4 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
             else if(m.getAddress()=="/tilt"){angle = m.getArgAsFloat(0);}
             else if(m.getAddress()=="/save"){kinectCtrl.saveToFile(settingFile);}
             else if(m.getAddress()=="/get"){
@@ -261,6 +265,8 @@ void ofApp::updateOSC(){
                 SENDVEC("/p3", calib.p3)
                 SENDVEC("/p4", calib.p4)
                 SENDFLOAT("/tilt",angle )
+                SENDFLOAT("/near",nearThreshold )
+                SENDFLOAT("/far",farThreshold )
                 
             }
 

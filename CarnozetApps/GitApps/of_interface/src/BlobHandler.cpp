@@ -25,11 +25,11 @@ void BlobHandler::setupData(ofShader* blurXin,ofShader * blurYin){
     blurX=blurXin;
     blurY = blurYin;
     blobClient.setup();
-//        blobClient.setApplicationName("kinectExample");
+        blobClient.setApplicationName("kinectExample");
 //    blobClient.setApplicationName("kinectExampleDebug");
     //    blobClient.setServerName("blob");
     //    blobClient.setApplicationName("Simple Server");
-    blobClient.setApplicationName("Arena");
+//    blobClient.setApplicationName("Arena");
     //    blobClient.setServerName("");
 #if USE_ONE_CHANNEL
     syphonTex.allocate(inw,inh,GL_R8);
@@ -73,19 +73,27 @@ void BlobHandler::update(){
 
 }
 
+template <class T>
+ofReadOnlyParameter<T> makeRO(ofParameter<T> & p){
+    return ofReadOnlyParameter<T>(p);
+}
+#define SETPERSISTENT(x) {auto ro =makeRO(x); x.setSerializable(false);persistentGroup.add(ro);}
+
 void BlobHandler::registerParams(){
     settings.setName("blobsettings");
 
     MYPARAM(isPiping,false,false,true);
     MYPARAM(computeBlob,true,false,true);
     MYPARAM(vidThreshold, 70.f, 0.f, 255.f);
+    MYPARAM(blobBlur, 100.f, 0.f, 255.f);
     MYPARAM(invertBW,true,false,true);
+    
     MYPARAM(minSide,0.f,0.f,1.f);
     MYPARAM(maxSide,1.f,0.f,1.f);
     MYPARAM(maxBlobs, 1,0,4);
     MYPARAM(findHoles,false,false,true);
     MYPARAM(simplification,0.f,0.f,.1f);
-    MYPARAM(smooth,0.f,0.f,10.f);
+    MYPARAM(smooth,0.f,0.f,30.f);
     MYPARAM(polyMaxPoints, 0,0,200);
     MYPARAM(maxLengthExtrem, 15.f,0.f,100.f);
     MYPARAM(maxArmWidth, .05f,0.01f,.2f);
@@ -95,11 +103,14 @@ void BlobHandler::registerParams(){
     MYPARAM(pos, ofVec3f(0.5),ofVec3f(0),ofVec4f(1.));
     MYPARAM(scale, ofVec3f(1),ofVec3f(0),ofVec4f(2.));
     MYPARAM(crop, ofVec4f(0),ofVec4f(0),ofVec4f(100));
-}
-
-vector<ofAbstractParameter *> BlobHandler::getGlobalParams(){
+    
+    
+    SETPERSISTENT(vidThreshold);
+    
     
 }
+
+
 
 //
 //
@@ -150,26 +161,32 @@ void BlobHandler::getGS(){
 #if USE_ONE_CHANNEL
     glBlendEquation(GL_FUNC_ADD_EXT);
 
-    glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_DST_ALPHA);
+
+    glBlendColor(1,1,1,blobBlur/255.0);
+    glBlendFunc(GL_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+//    glBlendFunc(GL_CONSTANT_ALPHA, GL_CONSTANT_ALPHA);
     syphonTex.begin();
-    if(vidThreshold>0){
+    if(vidThreshold>0 ){
         threshBW.begin();
         threshBW.setUniform1f("thresh",(float)(vidThreshold/255.0f));
         threshBW.setUniform1f("colOn",invertBW?0:1);
         threshBW.setUniform1f("colOff",invertBW?1:0);
     }
-    ofSetColor(255);
+//    ofSetColor(0);//,0,0,blobBlur);
+//    ofRect(0, 0, blobClient.getWidth(), blobClient.getHeight());
+
+//    ofSetColor(255);
     blobClient.draw(0,0);
     if(vidThreshold>0){
         threshBW.end();
     }
     syphonTex.end();
-
+    ofEnableAlphaBlending();
     auto & tr = syphonTex.getTextureReference();
     tr.bind();
     glGetTexImage(tr.texData.textureTarget,0,GL_RED,GL_UNSIGNED_BYTE, gs.getPixels());
     tr.unbind();
-
+    
     //    syphonTex.dst->readToPixels(pix);
 //    gs.setFromPixels(pix);
     //    gs.updateTexture();
@@ -189,11 +206,11 @@ void BlobHandler::getGS(){
 
 
 void BlobHandler::compBlob(){
-#if !USE_ONE_CHANNEL
+//#if !USE_ONE_CHANNEL
     if(vidThreshold >0){
         gs.threshold(vidThreshold,invertBW);
     }
-#endif
+//#endif
     contourFinder.findContours(gs, minSide*inw*inh*minSide, maxSide*inw*inh*maxSide, maxBlobs, findHoles);
 
     blobs = contourFinder.blobs;
@@ -340,7 +357,7 @@ vector<ofVec3f> BlobHandler::compExtrems(float w, float h){
 
     float sum_angles=0;
     int begin=0,end=1;
-    float maxangle = 130;
+    float maxangle = 170;
 
 
     for (int i = 0 ; i< cachedP.size();i++){
@@ -375,8 +392,11 @@ vector<ofVec3f> BlobHandler::compExtrems(float w, float h){
             else{
                 break;
             }
-
-            if( sum_angles>maxangle){
+            
+            if(sum_angles<0){
+                begin = end;
+            }
+            else if( sum_angles>maxangle && end-begin>maxLengthExtrem/2){
 
                 if(tmpspaced[begin%tmpspaced.size()].distance(tmpspaced[end%tmpspaced.size()])>maxArmWidth){
                     continue;
@@ -437,7 +457,7 @@ vector<ofVec3f> BlobHandler::compExtrems(float w, float h){
 
     return res;
 }
-
+//
 //void BlobHandler::blurblob(){
 //    ofPushMatrix();
 //    ofPushStyle();
@@ -470,5 +490,5 @@ vector<ofVec3f> BlobHandler::compExtrems(float w, float h){
 //    ofPopStyle();
 //    ofPopView();
 //}
-
-
+//
+//

@@ -153,7 +153,11 @@ public:
     ofParameter<bool> isPipe,hidePipe,pipeMask;
     ofParameter<float> pipeblur,kaleidoscopeScaleX,kaleidoscopeScaleY,kaleidoscopeBlend,kaleidoscopeAngle;
     ofParameter<ofVec4f> cropScreen;
-
+    
+    
+    string persistentSettingsPath;
+    void  loadPersistent();
+    void savePersistent();
     
     int zdepth;
     int inw;

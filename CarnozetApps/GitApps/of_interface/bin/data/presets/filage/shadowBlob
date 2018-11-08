@@ -10,6 +10,7 @@
 		<alphablur>255</alphablur>
 		<bloomsize>0</bloomsize>
 		<isGloom>0</isGloom>
+		<gloomSize>0</gloomSize>
 		<invertColor>0</invertColor>
 		<isKaleidoscope>0</isKaleidoscope>
 		<kaleidoscopeScaleX>0.749756</kaleidoscopeScaleX>
@@ -32,7 +33,8 @@
 	</global>
 	<blobsettings>
 		<isPiping>0</isPiping>
-		<vidThreshold>10.4082</vidThreshold>
+		<computeBlob>1</computeBlob>
+		<blobBlur>0.588</blobBlur>
 		<invertBW>0</invertBW>
 		<minSide>0</minSide>
 		<maxSide>1</maxSide>
@@ -64,12 +66,7 @@
 		<customPoint>0, 0, 0, 0</customPoint>
 	</attrCtl>
 	<screensCtl>
-		<invertMask>1</invertMask>
-		<mask0>0</mask0>
-		<mask1>0</mask1>
-		<mask2>0</mask2>
-		<mask3>0</mask3>
-		<mask4>0</mask4>
+		<invertMask>0</invertMask>
 	</screensCtl>
 	<Visu>
 		<background>
@@ -111,6 +108,7 @@
 				<isActive>1</isActive>
 				<k>0.00388252</k>
 				<l0>1</l0>
+				<l0max>0</l0max>
 				<z>0.307616</z>
 				<size>3</size>
 			</netw>
@@ -118,6 +116,7 @@
 				<isActive>1</isActive>
 				<k>0.00388252</k>
 				<l0>1</l0>
+				<l0max>0</l0max>
 				<z>0.327526</z>
 				<size>3</size>
 			</neth>

@@ -29,6 +29,7 @@ public:
 
     ofParameter<ofVec2f> * selected;
     ofPixels pixels;
+    ofParameter<int > alphaBlur;
 private:
 
     ofPoint src[4];

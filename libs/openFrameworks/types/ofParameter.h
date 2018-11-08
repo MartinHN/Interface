@@ -448,7 +448,7 @@ void ofParameter<ParameterType>::makeReferenceTo(ofParameter<ParameterType> mom)
 template <typename T>
 struct FriendMaker {typedef T Type;};
 
-template<typename ParameterType,typename Friend>
+template<typename ParameterType,typename Friend=FriendMaker<ParameterType> >
 class ofReadOnlyParameter: public ofAbstractParameter{
 public:
 	ofReadOnlyParameter();

@@ -15,6 +15,7 @@ boule2gomme::boule2gomme(VisuHandler * v):VisuClass(v){
     MYPARAM(drawSyphon,false,true,false);
     MYPARAM(drawPipe,false,true,false);
     MYPARAM(drawAttr,false,true,false);
+    MYPARAM(drawGSBlob,false,true,false);
 
     settings.setName("boule2gomme");
 }
@@ -33,6 +34,7 @@ void boule2gomme::draw(int w, int h){
     if(drawSyphon) dad->bH->syphonTex.draw(0,0);
     
     if(drawPipe)dad->pipePP.src->draw(0,0);
+    if(drawGSBlob) {dad->bH->gs.flagImageChanged();dad->bH->gs.updateTexture();dad->bH->gs.draw(0, 0);}
     
     if(drawAttr){
         int rayon = 30;

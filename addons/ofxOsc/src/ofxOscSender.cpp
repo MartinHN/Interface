@@ -125,11 +125,11 @@ void ofxOscSender::appendParameter( ofxOscBundle & _bundle, const ofAbstractPara
 		}
 		_bundle.addBundle(bundle);
 	}else{
-		if(parameter.isSerializable()){
+//        if(parameter.isSerializable()){
 			ofxOscMessage msg;
 			appendParameter(msg,parameter,address);
 			_bundle.addMessage(msg);
-		}
+//        }
 	}
 }
 

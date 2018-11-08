@@ -32,7 +32,8 @@ public:
     void getGS();
     void compBlob();
     void registerParams();
-    vector<ofAbstractParameter *> getGlobalParams();
+
+    ofParameterGroup persistentGroup;
     void compCache();
     void setupData(ofShader* blurXin,ofShader * blurYin);
     vector<ofVec3f> compCentroid(float w=1,float h=1);
@@ -74,7 +75,7 @@ public:
     
     vector<ofxCvBlob> blobs;
 
-    ofParameter<float> vidThreshold;
+    ofParameter<float> vidThreshold,blobBlur;
     ofParameterGroup settings;
     ofParameter<float> minSide, maxSide,maxLengthExtrem,maxArmWidth;
     ofParameter<int> maxBlobs,polyMaxPoints;

@@ -28,7 +28,7 @@ void testApp::setup(){
     glEnable(GL_POINT_SPRITE);
     glPointParameteri(	GL_POINT_SPRITE_COORD_ORIGIN,GL_UPPER_LEFT);
 
-    ofSetVerticalSync(false);
+    ofSetVerticalSync(true);
     ofSetFrameRate(FPS);
 
     width = ofGetWindowWidth();
@@ -86,7 +86,8 @@ void testApp::setup(){
     sH.setup(&scrw,&scrh,zdepth);
     bH.setup(inw,inh,&sH);
     visuHandler.setup(&attrctl,&bH,inw,inh,zdepth,&scrw,&scrh,&sH);
-
+    persistentSettingsPath = "persistentSetting.xml";
+    
 #ifndef GUIMODE
 
 
@@ -616,9 +617,15 @@ void testApp::keyPressed(int key){
             ofSetWindowShape(liveMode?100:1000, liveMode?30:800);
             if(liveMode){gui.unload();}
             else{gui.load(globalParam,1000,800);}
-
-
             break;
+            
+//        case 'k':
+//            savePersistent();
+//            break;
+//            
+//        case 'i':
+//            loadPersistent();
+//            break;
 
         case 'f':
             isFPS=!isFPS ;
@@ -628,7 +635,20 @@ void testApp::keyPressed(int key){
 }
 #endif
 
+void testApp::savePersistent(){
+    ofXml xml;
+    xml.serialize(bH.persistentGroup);
+    xml.save(persistentSettingsPath);
+    
+}
 
+void  testApp::loadPersistent(){
+    ofXml xml;
+    xml.load(persistentSettingsPath);
+    xml.deserialize(bH.persistentGroup);
+    
+    
+}
 #ifndef GUIMODE
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){

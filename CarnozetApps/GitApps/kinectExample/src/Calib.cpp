@@ -103,10 +103,11 @@ void Calib::updateMatrix(){
 }
 
 void Calib::computeOnTexture(ofTexture &t,bool updatePixels){
+    ofEnableAlphaBlending();
     if(t.getWidth()!=mappedTexture.getWidth() || t.getHeight()!=mappedTexture.getHeight()){
-        mappedTexture.allocate(t.getWidth(),t.getHeight(),GL_R8);
+        mappedTexture.allocate(t.getWidth(),t.getHeight(),GL_R16);
         textureSize.set(t.getWidth(),t.getHeight());
-        pixels.allocate(textureSize.x, textureSize.y, ofPixelFormat::OF_PIXELS_MONO);
+        pixels.allocate(textureSize.x, textureSize.y, OF_IMAGE_GRAYSCALE);
         updateMatrix();
 
     }
@@ -118,10 +119,9 @@ void Calib::computeOnTexture(ofTexture &t,bool updatePixels){
 //
 
     ofPushMatrix();
-
     mappedTexture.begin();
-    ofSetColor(0);
-    ofRect(0,0,textureSize.x,textureSize.y);
+//    ofSetColor(0,0,0,alphaBlur);
+//    ofRect(0,0,textureSize.x,textureSize.y);
     ofSetColor(255);
 
 
