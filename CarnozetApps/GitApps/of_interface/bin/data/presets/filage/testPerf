@@ -41,8 +41,8 @@
 		<simplification>0</simplification>
 		<smooth>10</smooth>
 		<polyMaxPoints>0</polyMaxPoints>
-		<maxLengthExtrem>15</maxLengthExtrem>
-		<maxArmWidth>0.0962755</maxArmWidth>
+
+
 		<screenN>0</screenN>
 		<invertX>1</invertX>
 		<invertY>0</invertY>

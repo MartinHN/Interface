@@ -2,12 +2,13 @@
 	<nearThreshold>255</nearThreshold>
 	<farThreshold>41</farThreshold>
 	<bThreshWithOpenCV>1</bThreshWithOpenCV>
-	<angle>21.77</angle>
+	<angle>18.8</angle>
 <settings/>
 <calib>
-		<p1>0.1312, 0.3506</p1>
-		<p2>0.8688, 0.3388</p2>
-		<p3>0.9494, 0.9882</p3>
-		<p4>0.0672, 0.9446</p4>
+		<p1>0.1132, 0.2592</p1>
+		<p2>0.8708, 0.2486</p2>
+		<p3>0.9474, 0.9181</p3>
+		<p4>0.0553, 0.9004</p4>
 	</calib>
+<calib.alphaBlur>255</calib.alphaBlur>
 </settings>

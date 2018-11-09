@@ -34,7 +34,7 @@
 	<blobsettings>
 		<isPiping>0</isPiping>
 		<computeBlob>1</computeBlob>
-		<blobBlur>0.588</blobBlur>
+
 		<invertBW>0</invertBW>
 		<minSide>0</minSide>
 		<maxSide>1</maxSide>
@@ -43,8 +43,8 @@
 		<simplification>0</simplification>
 		<smooth>2.2439</smooth>
 		<polyMaxPoints>0</polyMaxPoints>
-		<maxLengthExtrem>15</maxLengthExtrem>
-		<maxArmWidth>0.0554146</maxArmWidth>
+
+
 		<screenN>0</screenN>
 		<invertX>0</invertX>
 		<invertY>0</invertY>
@@ -127,6 +127,10 @@
 				<freeze>0.142957</freeze>
 				<freezemin>0</freezemin>
 				<damp>0.915381</damp>
+				<noiseFreq>4</noiseFreq>
+				<noiseAmp>0</noiseAmp>
+				<noisePhase>0</noisePhase>
+				<applyOnBorder>0</applyOnBorder>
 			</origin>
 			<rotation>
 				<isActive>0</isActive>
@@ -146,17 +150,19 @@
 				<rin>0.173967</rin>
 				<massin>4.87805e-06</massin>
 				<damp>0.741165</damp>
+				<distortX>1</distortX>
 			</gravity>
-			<smoothyGrav>
+			<planeForce>
 				<isActive>0</isActive>
-				<attrFamilly>2</attrFamilly>
-				<attrZone>0</attrZone>
-				<r>0.5</r>
-				<mass>0.033101</mass>
-				<rin>0.23121</rin>
-				<minattr>0</minattr>
-				<damp>0.920358</damp>
-			</smoothyGrav>
+				<k>0.1</k>
+				<z>0.01</z>
+				<freeze>0</freeze>
+				<freezemin>0</freezemin>
+				<damp>0.9</damp>
+				<noiseFreq>4</noiseFreq>
+				<noiseAmp>0</noiseAmp>
+				<noisePhase>0</noisePhase>
+			</planeForce>
 			<spring>
 				<isActive>1</isActive>
 				<attrFamilly>2</attrFamilly>
@@ -165,6 +171,7 @@
 				<l0>0.1</l0>
 				<z>0</z>
 				<mode>1</mode>
+				<distortX>1</distortX>
 			</spring>
 			<fieldForce>
 				<isActive>0</isActive>
@@ -281,6 +288,7 @@
 			<drawSyphon>0</drawSyphon>
 			<drawPipe>1</drawPipe>
 			<drawAttr>1</drawAttr>
+			<drawGSBlob>1</drawGSBlob>
 		</boule2gomme>
 	</Visu>
 </OF>

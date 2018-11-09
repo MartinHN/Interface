@@ -348,7 +348,7 @@
 		6F1EE65118A9229100608125 /* ofxSliderGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSliderGroup.h; sourceTree = "<group>"; };
 		6F1EE65218A9229100608125 /* ofxToggle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxToggle.cpp; sourceTree = "<group>"; };
 		6F1EE65318A9229100608125 /* ofxToggle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
-		6F1EE6DC18A927ED00608125 /* MurMur d'Ombre 10.9 copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MurMur d'Ombre 10.9 copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F1EE6DC18A927ED00608125 /* MurMur d'Ombre UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MurMur d'Ombre UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1EE6DD18A927ED00608125 /* MurMur d'Ombre 10.9 copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MurMur d'Ombre 10.9 copy-Info.plist"; path = "/Users/mhermant/Documents/OF8/CarnozetApps/GitApps/MurMur d'Ombre/MurMur d'Ombre 10.9 copy-Info.plist"; sourceTree = "<absolute>"; };
 		6F1EE6E018A9292500608125 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		6F1EE6E118A9292500608125 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
@@ -366,7 +366,7 @@
 		6F9E617E18AD48EB00D93498 /* gloom.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = gloom.frag; sourceTree = "<group>"; };
 		6FB148C418AA5CF800C6B63F /* background.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = background.cpp; sourceTree = "<group>"; };
 		6FB148C518AA5CF800C6B63F /* background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = background.h; sourceTree = "<group>"; };
-		6FC6766618A9118F00D24E6C /* MurMur d'Ombre 10.9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MurMur d'Ombre 10.9.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FC6766618A9118F00D24E6C /* MurMur d'Ombre Main.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MurMur d'Ombre Main.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC6766718A9118F00D24E6C /* MurMur d'Ombre 10.6 copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MurMur d'Ombre 10.6 copy2-Info.plist"; path = "/Users/mhermant/Documents/OF8/CarnozetApps/GitApps/MurMur d'Ombre/MurMur d'Ombre 10.6 copy2-Info.plist"; sourceTree = "<absolute>"; };
 		6b907cfbb1b0fede76c41aa0c64ddaf7 /* heap.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = heap.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/heap.h; sourceTree = SOURCE_ROOT; };
 		6dd5a3cbb6d5bba1c1354f1b16430892 /* flann.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = flann.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/flann.hpp; sourceTree = SOURCE_ROOT; };
@@ -1047,9 +1047,9 @@
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
 				F2F774561653B46B00E0CB96 /* shaders */,
-				6FC6766618A9118F00D24E6C /* MurMur d'Ombre 10.9.app */,
+				6FC6766618A9118F00D24E6C /* MurMur d'Ombre Main.app */,
 				6FC6766718A9118F00D24E6C /* MurMur d'Ombre 10.6 copy2-Info.plist */,
-				6F1EE6DC18A927ED00608125 /* MurMur d'Ombre 10.9 copy.app */,
+				6F1EE6DC18A927ED00608125 /* MurMur d'Ombre UI.app */,
 				6F1EE6DD18A927ED00608125 /* MurMur d'Ombre 10.9 copy-Info.plist */,
 				F200AA9A18A97C5E0004F00A /* MurMur d'Ombre 10.6 copy3-Info.plist */,
 			);
@@ -1532,9 +1532,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6F1EE66C18A927ED00608125 /* MurMur d'Ombre 10.9 GUI */ = {
+		6F1EE66C18A927ED00608125 /* MurMur d'Ombre UI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6F1EE6D918A927ED00608125 /* Build configuration list for PBXNativeTarget "MurMur d'Ombre 10.9 GUI" */;
+			buildConfigurationList = 6F1EE6D918A927ED00608125 /* Build configuration list for PBXNativeTarget "MurMur d'Ombre UI" */;
 			buildPhases = (
 				6F1EE66F18A927ED00608125 /* Sources */,
 				6F1EE6C218A927ED00608125 /* Frameworks */,
@@ -1546,14 +1546,14 @@
 			dependencies = (
 				6F1EE66D18A927ED00608125 /* PBXTargetDependency */,
 			);
-			name = "MurMur d'Ombre 10.9 GUI";
+			name = "MurMur d'Ombre UI";
 			productName = myOFApp;
-			productReference = 6F1EE6DC18A927ED00608125 /* MurMur d'Ombre 10.9 copy.app */;
+			productReference = 6F1EE6DC18A927ED00608125 /* MurMur d'Ombre UI.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6FC675F918A9118F00D24E6C /* MurMur d'Ombre 10.9 */ = {
+		6FC675F918A9118F00D24E6C /* MurMur d'Ombre */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6FC6766318A9118F00D24E6C /* Build configuration list for PBXNativeTarget "MurMur d'Ombre 10.9" */;
+			buildConfigurationList = 6FC6766318A9118F00D24E6C /* Build configuration list for PBXNativeTarget "MurMur d'Ombre" */;
 			buildPhases = (
 				6FC675FC18A9118F00D24E6C /* Sources */,
 				6FC6764F18A9118F00D24E6C /* Frameworks */,
@@ -1565,9 +1565,9 @@
 			dependencies = (
 				6FC675FA18A9118F00D24E6C /* PBXTargetDependency */,
 			);
-			name = "MurMur d'Ombre 10.9";
+			name = "MurMur d'Ombre";
 			productName = myOFApp;
-			productReference = 6FC6766618A9118F00D24E6C /* MurMur d'Ombre 10.9.app */;
+			productReference = 6FC6766618A9118F00D24E6C /* MurMur d'Ombre Main.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1599,8 +1599,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				6FC675F918A9118F00D24E6C /* MurMur d'Ombre 10.9 */,
-				6F1EE66C18A927ED00608125 /* MurMur d'Ombre 10.9 GUI */,
+				6FC675F918A9118F00D24E6C /* MurMur d'Ombre */,
+				6F1EE66C18A927ED00608125 /* MurMur d'Ombre UI */,
 			);
 		};
 /* End PBXProject section */
@@ -1951,7 +1951,7 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "MurMur d'Ombre 10.9 copy";
+				PRODUCT_NAME = "MurMur d'Ombre UI";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2049,7 +2049,7 @@
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "MurMur d'Ombre 10.9 copy";
+				PRODUCT_NAME = "MurMur d'Ombre UI";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2146,7 +2146,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
-				PRODUCT_NAME = "MurMur d'Ombre 10.9";
+				PRODUCT_NAME = "MurMur d'Ombre Main";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2242,7 +2242,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "";
-				PRODUCT_NAME = "MurMur d'Ombre 10.9";
+				PRODUCT_NAME = "MurMur d'Ombre Main";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2417,7 +2417,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6F1EE6D918A927ED00608125 /* Build configuration list for PBXNativeTarget "MurMur d'Ombre 10.9 GUI" */ = {
+		6F1EE6D918A927ED00608125 /* Build configuration list for PBXNativeTarget "MurMur d'Ombre UI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6F1EE6DA18A927ED00608125 /* Debug */,
@@ -2426,7 +2426,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6FC6766318A9118F00D24E6C /* Build configuration list for PBXNativeTarget "MurMur d'Ombre 10.9" */ = {
+		6FC6766318A9118F00D24E6C /* Build configuration list for PBXNativeTarget "MurMur d'Ombre" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6FC6766418A9118F00D24E6C /* Debug */,

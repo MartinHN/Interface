@@ -348,19 +348,6 @@
           "bypass": false,
           "variables": "@{parent.variables}",
           "tabs": []
-        },
-        {
-          "type": "clone",
-          "top": 410,
-          "left": 820,
-          "id": "clone_@{parent.id}",
-          "width": "auto",
-          "height": "auto",
-          "css": "",
-          "widgetId": "",
-          "props": {},
-          "label": "",
-          "variables": "@{parent.variables}"
         }
       ],
       "tabs": [],

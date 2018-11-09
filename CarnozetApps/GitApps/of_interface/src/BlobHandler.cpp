@@ -25,11 +25,11 @@ void BlobHandler::setupData(ofShader* blurXin,ofShader * blurYin){
     blurX=blurXin;
     blurY = blurYin;
     blobClient.setup();
-//        blobClient.setApplicationName("kinectExample");
+        blobClient.setApplicationName("kinectExample");
 //    blobClient.setApplicationName("kinectExampleDebug");
     //    blobClient.setServerName("blob");
     //    blobClient.setApplicationName("Simple Server");
-    blobClient.setApplicationName("Arena");
+//    blobClient.setApplicationName("Arena");
     //    blobClient.setServerName("");
 #if USE_ONE_CHANNEL
     syphonTex.allocate(inw,inh,GL_R8);
