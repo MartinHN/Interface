@@ -25,11 +25,11 @@ void BlobHandler::setupData(ofShader* blurXin,ofShader * blurYin){
     blurX=blurXin;
     blurY = blurYin;
     blobClient.setup();
-        blobClient.setApplicationName("kinectExample");
+//        blobClient.setApplicationName("kinectExample");
 //    blobClient.setApplicationName("kinectExampleDebug");
     //    blobClient.setServerName("blob");
     //    blobClient.setApplicationName("Simple Server");
-//    blobClient.setApplicationName("Arena");
+    blobClient.setApplicationName("Arena");
     //    blobClient.setServerName("");
 #if USE_ONE_CHANNEL
     syphonTex.allocate(inw,inh,GL_R8);
@@ -282,6 +282,7 @@ void BlobHandler::compCache(){
             pp = pp.getSmoothed(smooth);
         }
         if(polyMaxPoints>0){pp=pp.getResampledByCount(polyMaxPoints);}
+//        if(polySpacing>0){pp=pp.getResampledBySpacing(polySpacing);}
         if(pp.size()>0){
             pp.close();
 
@@ -365,7 +366,7 @@ vector<ofVec3f> BlobHandler::compExtrems(float w, float h){
         end=1;
         sum_angles=0;
         const ofPolyline & tmpspaced = cachedP[i];//.getSmoothed(0.01);
-                                          //        tmpspaced = tmpspaced.getResampledBySpacing(0.01);
+        
         deque<float> tmpp;
         if(tmpspaced.size()<maxLengthExtrem){continue;}
 
@@ -393,8 +394,14 @@ vector<ofVec3f> BlobHandler::compExtrems(float w, float h){
                 break;
             }
             
-            if(sum_angles<0){
-                begin = end;
+            if(sum_angles<-maxangle/4){
+                sum_angles-=tmpp.front();
+                tmpp.pop_front();
+                begin++;
+                if(end<= begin){
+                    end = begin;
+                    sum_angles=0;
+                }
             }
             else if( sum_angles>maxangle && end-begin>maxLengthExtrem/2){
 
