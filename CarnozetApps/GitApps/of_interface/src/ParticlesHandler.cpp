@@ -167,6 +167,10 @@ void Particles::setup(){
     forces[forces.size()-1]->addParameter("freeze",0.f,0.f,.80f);
     forces[forces.size()-1]->addParameter("freezemin",0.f,0.f,.30f);
     forces[forces.size()-1]->addParameter("damp",0.9f,0.5f,1.0f);
+    forces[forces.size()-1]->addParameter("noiseFreq",4.f,0.f,50.f);
+    forces[forces.size()-1]->addParameter("noiseAmp",0.f,0.f,1.f);
+    forces[forces.size()-1]->addParameter("noisePhase",0.f,0.f,1.f);
+    forces[forces.size()-1]->addParameter("applyOnBorder",0.f,0.f,1.f);
     
     forces.push_back(new Force("rotation",true));
     forces[forces.size()-1]->addParameter("type",0,0,1);
@@ -182,12 +186,15 @@ void Particles::setup(){
     forces[forces.size()-1]->addParameter("damp",1.f,.60f,1.0f);
     forces[forces.size()-1]->addParameter("distortX",1.f,0.f,2.f);
 
-    forces.push_back(new Force("smoothyGrav",true));
-    forces[forces.size()-1]->addParameter("r",.50f,0.f,1.f);
-    forces[forces.size()-1]->addParameter("mass",.1f,-.2f,.5f);
-    forces[forces.size()-1]->addParameter("rin",.50f,0.f,.5f);
-    forces[forces.size()-1]->addParameter("minattr",.0f,-.2f,.2f);
-    forces[forces.size()-1]->addParameter("damp",1.f,.60f,1.0f);
+    forces.push_back(new Force("planeForce"));
+    forces[forces.size()-1]->addParameter("k",.10f,0.f,.25f);
+    forces[forces.size()-1]->addParameter("z",.01f,0.f,.5f);
+    forces[forces.size()-1]->addParameter("freeze",0.f,0.f,.80f);
+    forces[forces.size()-1]->addParameter("freezemin",0.f,0.f,.30f);
+    forces[forces.size()-1]->addParameter("damp",0.9f,0.5f,1.0f);
+    forces[forces.size()-1]->addParameter("noiseFreq",4.f,0.f,50.f);
+    forces[forces.size()-1]->addParameter("noiseAmp",0.f,0.f,1.f);
+    forces[forces.size()-1]->addParameter("noisePhase",0.f,0.f,1.f);
 
     
     forces.push_back(new Force("spring",true));
