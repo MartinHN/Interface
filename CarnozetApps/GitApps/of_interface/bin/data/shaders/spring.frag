@@ -18,6 +18,7 @@ uniform vec3 attr;
 // forces
 
 uniform float k;
+uniform float distortX;
 uniform float l0;
 uniform float z;
 uniform int mode;
@@ -33,6 +34,7 @@ void main(void){
 
 
     vec3 distbuf = (attr-pos);
+    distbuf.x *= distortX;
     vec3 distnormed = normalize(distbuf);
     float normbuf = length(distbuf);
     

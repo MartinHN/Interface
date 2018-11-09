@@ -180,6 +180,7 @@ void Particles::setup(){
     forces[forces.size()-1]->addParameter("rin",.50f,0.f,.5f);
     forces[forces.size()-1]->addParameter("massin",.00f,-.0002f,.0002f);
     forces[forces.size()-1]->addParameter("damp",1.f,.60f,1.0f);
+    forces[forces.size()-1]->addParameter("distortX",1.f,0.f,2.f);
 
     forces.push_back(new Force("smoothyGrav",true));
     forces[forces.size()-1]->addParameter("r",.50f,0.f,1.f);
@@ -194,6 +195,7 @@ void Particles::setup(){
     forces[forces.size()-1]->addParameter("l0",.010f,0.f,.1f);
     forces[forces.size()-1]->addParameter("z",.0f,-.5f,.5f);    
     forces[forces.size()-1]->addParameter("mode",1,0,1);
+    forces[forces.size()-1]->addParameter("distortX",1.f,0.f,2.f);
     
     forces.push_back(new Force("fieldForce"));
     forces[forces.size()-1]->addParameter("k",.030f,-.3f,.3f);

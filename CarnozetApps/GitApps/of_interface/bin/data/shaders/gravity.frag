@@ -22,6 +22,7 @@ uniform float massin;
 uniform float r;
 uniform float rin;
 uniform float damp;
+uniform float distortX;
 
 
 
@@ -33,6 +34,7 @@ void main(void){
     
     
     vec3 distbuf = (attr-pos);
+    distbuf.x *= distortX;
     float normbuf = length(distbuf);//dist.x*dist.x+dist.y*dist.y+dist.z*dist.z;
     
 //    float normxy = sqrt(distbuf.x*distbuf.x+distbuf.y*distbuf.y);
