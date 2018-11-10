@@ -23,6 +23,7 @@ music/
 *.asd
 **/Iconr
 .splice_folder
+*.mov
 
 # Xcode
 #

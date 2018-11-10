@@ -61,7 +61,7 @@ void ofApp::setup() {
     kinectCtrl.loadFromFile(settingFile);
 
     syphonServer.setName("");
-
+    
 
     osc.setup(11002);
 }
