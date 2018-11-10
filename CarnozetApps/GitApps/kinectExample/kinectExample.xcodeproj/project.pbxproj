@@ -72,7 +72,6 @@
 		3F45AD3721974740002AFC3E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
 		3F45AD3821974740002AFC3E /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		3F45AD3921974740002AFC3E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		3F45AD3A21974740002AFC3E /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		3F45AD3B21974740002AFC3E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		3F45AD3C21974740002AFC3E /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
 		3F45AD3D21974740002AFC3E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9730E8CC7DD009D7055 /* AudioToolbox.framework */; };
@@ -89,6 +88,7 @@
 		3F45AD4821974740002AFC3E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		3F45AD4B21974740002AFC3E /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D58DCB2C0AEFDE6171E29540 /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F45AD4C21974740002AFC3E /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
+		3F45ADF221975254002AFC3E /* openFrameworksQT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F45ADF121974A11002AFC3E /* openFrameworksQT.a */; };
 		3F70423C21908C3600B467C5 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F70423B21908C3600B467C5 /* SyphonNameboundClient.m */; };
 		3F70423E21908C8200B467C5 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D58DCB2C0AEFDE6171E29540 /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F73D67621907F6600F80EFF /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D58DCB2C0AEFDE6171E29540 /* Syphon.framework */; };
@@ -152,12 +152,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3F45AD0121974740002AFC3E /* PBXContainerItemProxy */ = {
+		3F45ADED21974A11002AFC3E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = E4B27C1410CBEB8E00536013;
-			remoteInfo = openFrameworks;
+			remoteGlobalIDString = 3F45AD522197495A002AFC3E;
+			remoteInfo = openFrameworksQT;
+		};
+		3F45ADF021974A11002AFC3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3F45ADDC2197495A002AFC3E;
+			remoteInfo = openFrameworksQT;
 		};
 		E4328147138ABC890047C5CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -431,10 +438,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F45ADF221975254002AFC3E /* openFrameworksQT.a in Frameworks */,
 				3F45AD3721974740002AFC3E /* Accelerate.framework in Frameworks */,
 				3F45AD3821974740002AFC3E /* QTKit.framework in Frameworks */,
 				3F45AD3921974740002AFC3E /* GLUT.framework in Frameworks */,
-				3F45AD3A21974740002AFC3E /* openFrameworksDebug.a in Frameworks */,
 				3F45AD3B21974740002AFC3E /* AGL.framework in Frameworks */,
 				3F45AD3C21974740002AFC3E /* ApplicationServices.framework in Frameworks */,
 				3F45AD3D21974740002AFC3E /* AudioToolbox.framework in Frameworks */,
@@ -1044,6 +1051,7 @@
 			isa = PBXGroup;
 			children = (
 				E4328148138ABC890047C5CB /* openFrameworksDebug.a */,
+				3F45ADF121974A11002AFC3E /* openFrameworksQT.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1180,7 +1188,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3F45AD0021974740002AFC3E /* PBXTargetDependency */,
+				3F45ADEE21974A11002AFC3E /* PBXTargetDependency */,
 			);
 			name = kinectExample_withVideo;
 			productName = myOFApp;
@@ -1242,6 +1250,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		3F45ADF121974A11002AFC3E /* openFrameworksQT.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = openFrameworksQT.a;
+			remoteRef = 3F45ADF021974A11002AFC3E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E4328148138ABC890047C5CB /* openFrameworksDebug.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1400,10 +1415,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3F45AD0021974740002AFC3E /* PBXTargetDependency */ = {
+		3F45ADEE21974A11002AFC3E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = openFrameworks;
-			targetProxy = 3F45AD0121974740002AFC3E /* PBXContainerItemProxy */;
+			name = openFrameworksQT;
+			targetProxy = 3F45ADED21974A11002AFC3E /* PBXContainerItemProxy */;
 		};
 		E4EEB9AC138B136A00A80321 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1495,7 +1510,14 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-D__MACOSX_CORE__",
+					"-lpthread",
+					"-mtune=native",
+					"-DUSE_QT",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1581,7 +1603,14 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-D__MACOSX_CORE__",
+					"-lpthread",
+					"-mtune=native",
+					"-DUSE_QT",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

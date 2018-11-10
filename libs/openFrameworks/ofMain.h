@@ -73,9 +73,10 @@
 
 //--------------------------
 // video
-//#include "ofVideoGrabber.h"
-//#include "ofVideoPlayer.h"
-
+#if USE_QT
+#include "ofVideoGrabber.h"
+#include "ofVideoPlayer.h"
+#endif
 //--------------------------
 // events
 #include "ofEvents.h"

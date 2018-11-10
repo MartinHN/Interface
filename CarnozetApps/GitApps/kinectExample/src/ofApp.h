@@ -41,6 +41,13 @@ public:
 #if CONTOUR
     ofxCvContourFinder contourFinder;
 #endif
+
+#if USE_QT
+
+    ofVideoPlayer player;
+    ofParameter<bool> useVideo;
+    void modeChanged(bool & m);
+#endif
     bool drawGUI;
     string settingFile;
     ofParameter<bool> bThreshWithOpenCV;
@@ -58,5 +65,6 @@ public:
 
 private:
     void updateOSC();
+    
 
 };

@@ -1,4 +1,7 @@
 
+#warning QTKMov
+
+
 #import "ofQTKitMovieRenderer.h"
 #import <Accelerate/Accelerate.h>
 

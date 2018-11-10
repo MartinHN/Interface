@@ -1,3 +1,4 @@
+#if USE_QT
 #include "ofQuickTimeGrabber.h"
 #include "ofUtils.h"
 
@@ -779,3 +780,4 @@ bool ofQuickTimeGrabber::qtSelectDevice(int deviceNumber, bool didWeChooseADevic
 //---------------------------------
 
 #endif
+#endif //USE_QT

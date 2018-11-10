@@ -1,3 +1,4 @@
+#if USE_QT
 #include "ofQuickTimePlayer.h"
 #include "ofUtils.h"
 
@@ -885,3 +886,4 @@ bool ofQuickTimePlayer::isPlaying(){
 #endif
 
 
+#endif //USE_QT

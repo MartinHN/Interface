@@ -55,13 +55,22 @@ void ofApp::setup() {
     isOpen.setSerializable(false);
     isOpen.addListener(this,&ofApp::openCloseKinnect);
     settings.add(calib.settings);
+
+#ifdef USE_QT
+    PB(useVideo,false);
+    player.loadMovie(ofToDataPath("recording.mov"));
+    player.setUseTexture(true);
+    player.setLoopState(ofLoopType::OF_LOOP_NORMAL);
+
+    useVideo.addListener(this,&ofApp::modeChanged);
+#endif
     kinectCtrl.setup(settings,"",10,20);
     drawGUI = true;
 
     kinectCtrl.loadFromFile(settingFile);
 
     syphonServer.setName("");
-    
+
 
     osc.setup(11002);
 }
@@ -75,13 +84,19 @@ void ofApp::update() {
 
     kinect.update();
 
+#if USE_QT
+    
+    if(useVideo){player.update();}
+    if((useVideo && player.isFrameNew() )|| (kinect.isConnected() && kinect.isFrameNewDepth())){
+            calib.computeOnTexture(player.getTextureReference(),true);
+#else
 
-    // there is a new frame and we are connected
-    if(kinect.isFrameNewDepth()) {
+    if(kinect.isFrameNewDepth()) { // there is a new frame and we are connected
         calib.computeOnTexture(kinect.getDepthTextureReference(),true);
-        
+#endif
         // load grayscale depth image from the kinect source
         grayImage.setFromPixels(calib.pixels);
+
 //        grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
 
         // we do two thresholds - one for the far plane and one for the near plane
@@ -129,13 +144,20 @@ void ofApp::draw() {
 if(drawGUI) {
     kinectCtrl.draw();
 
-    kinect.draw(0, ofGetHeight()/2, 400, 300);
-    
+//#if !USE_QT
+//    kinect.draw(0, ofGetHeight()/2, 400, 300);
+//#endif
+
     // draw from the live kinect
     int left = ofGetWidth()/2;
     int height = 250;
     int cH = 0;
+#if USE_QT
+    if(useVideo){player.draw(left, cH, 400, height);}
+    else{kinect.drawDepth(left, cH, 400, height);}
+#else
     kinect.drawDepth(left, cH, 400, height);
+#endif
     calib.drawUI(ofRectangle(left, cH, 400, height));
     cH+=height;
     grayImage.draw(left, cH, 400, height);
@@ -273,3 +295,14 @@ void ofApp::updateOSC(){
         }
     }
 }
+
+#if USE_QT
+void ofApp::modeChanged(bool & m){
+    if(m){
+        player.play();
+    }
+    else{
+        player.stop();
+    }
+}
+#endif

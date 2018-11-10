@@ -1,3 +1,5 @@
+#if USE_QT
+#warning useQT
 #include "ofVideoPlayer.h"
 #include "ofUtils.h"
 #include "ofGraphics.h"
@@ -406,3 +408,4 @@ bool ofVideoPlayer::isPlaying(){
 	}
 	return false;
 }
+#endif
