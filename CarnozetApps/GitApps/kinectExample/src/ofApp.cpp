@@ -57,12 +57,13 @@ void ofApp::setup() {
     settings.add(calib.settings);
     PB(resetCalib,false);
     resetCalib.addListener(this,&ofApp::resetCalibPoints);
-    resetCalib.setSetrializable(false);
+    resetCalib.setSerializable(false);
 #ifdef USE_QT
+
     PB(useVideo,false);
-    useVideo.setSerializeable(false);
+    useVideo.setSerializable(false);
     PB(pauseVideo,false);
-    pauseVideo.setSerializeable(false);
+    pauseVideo.setSerializable(false);
     player.loadMovie(ofToDataPath("recording.mov"));
     player.setUseTexture(true);
     player.setLoopState(ofLoopType::OF_LOOP_NORMAL);
