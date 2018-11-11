@@ -264,3 +264,11 @@ void findHomography(ofPoint src[4], ofPoint dst[4], float homography[16]){
 
     for(int i=0;i<16;i++) homography[i] = aux_H[i];
 }
+
+
+void Calib::reset(){
+    p1 = ofVec2f(0,0);
+    p2 = ofVec2f(1,0);
+    p3 = ofVec2f(1,1);
+    p4 = ofVec2f(0,1);
+}

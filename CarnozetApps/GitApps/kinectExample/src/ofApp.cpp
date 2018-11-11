@@ -55,14 +55,20 @@ void ofApp::setup() {
     isOpen.setSerializable(false);
     isOpen.addListener(this,&ofApp::openCloseKinnect);
     settings.add(calib.settings);
-
+    PB(resetCalib,false);
+    resetCalib.addListener(this,&ofApp::resetCalibPoints);
+    resetCalib.setSetrializable(false);
 #ifdef USE_QT
     PB(useVideo,false);
+    useVideo.setSerializeable(false);
+    PB(pauseVideo,false);
+    pauseVideo.setSerializeable(false);
     player.loadMovie(ofToDataPath("recording.mov"));
     player.setUseTexture(true);
     player.setLoopState(ofLoopType::OF_LOOP_NORMAL);
 
     useVideo.addListener(this,&ofApp::modeChanged);
+    pauseVideo.addListener(this,&ofApp::modeChanged);
 #endif
     kinectCtrl.setup(settings,"",10,20);
     drawGUI = true;
@@ -279,6 +285,7 @@ void ofApp::updateOSC(){
             else if(m.getAddress()=="/p4"){calib.p4 = ofVec2f(m.getArgAsFloat(0),m.getArgAsFloat(1));}
             else if(m.getAddress()=="/tilt"){angle = m.getArgAsFloat(0);}
             else if(m.getAddress()=="/save"){kinectCtrl.saveToFile(settingFile);}
+            else if(m.getAddress()=="/reset"){resetCalib=true;}
             else if(m.getAddress()=="/get"){
                 
                 fbOsc.setup(m.getAddress(),m.getRemotePort());
@@ -298,11 +305,19 @@ void ofApp::updateOSC(){
 
 #if USE_QT
 void ofApp::modeChanged(bool & m){
-    if(m){
+    if(useVideo && !pauseVideo){
         player.play();
     }
     else{
         player.stop();
     }
+
+
 }
 #endif
+    void ofApp::resetCalibPoints(bool & p){
+        if(resetCalib){
+            resetCalib=false;
+            calib.reset();
+        }
+    }

@@ -4134,6 +4134,26 @@
           "preArgs": "",
           "target": "127.0.0.1:11002",
           "bypass": false
+        },
+        {
+          "type": "push",
+          "top": "90%",
+          "left": 200,
+          "id": "resetCalib",
+          "linkId": "",
+          "width": "auto",
+          "height": "10%",
+          "label": "auto",
+          "color": "auto",
+          "css": "",
+          "on": 1,
+          "off": 0,
+          "precision": 2,
+          "address": "/save",
+          "preArgs": "",
+          "target": "127.0.0.1:11002",
+          "bypass": false,
+          "norelease": true
         }
       ],
       "tabs": [],

@@ -45,12 +45,13 @@ public:
 #if USE_QT
 
     ofVideoPlayer player;
-    ofParameter<bool> useVideo;
+    ofParameter<bool> useVideo,pauseVideo;
     void modeChanged(bool & m);
+    
 #endif
     bool drawGUI;
     string settingFile;
-    ofParameter<bool> bThreshWithOpenCV;
+    ofParameter<bool> bThreshWithOpenCV,resetCalib;
     ofParameter<bool> isOpen;
     ofParameter<int> nearThreshold;
     ofParameter<int> farThreshold;
@@ -62,7 +63,7 @@ public:
     ofxPanel kinectCtrl;
     ofxSyphonServer syphonServer;
     Calib calib;
-
+    void resetCalibPoints(bool & p);
 private:
     void updateOSC();
     
