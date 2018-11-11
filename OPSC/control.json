@@ -3507,7 +3507,7 @@
             },
             {
               "type": "fader",
-              "id": "/OF/Visu/particles/timeStep",
+              "id": "/OF/Visu/particles/timeStepM",
               "linkId": "",
               "width": "auto",
               "label": false,
@@ -3525,13 +3525,13 @@
               "doubleTap": false,
               "range": {
                 "min": 0,
-                "max": 40
+                "max": 2
               },
               "steps": "",
               "logScale": false,
               "unit": "",
               "origin": "auto",
-              "default": "",
+              "default": 1,
               "value": "",
               "precision": 2,
               "address": "@{this.id}",
