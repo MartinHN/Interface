@@ -53,7 +53,7 @@
 		<crop>0, 0, 0, 0</crop>
 	</blobsettings>
 	<attrCtl>
-		<isAttr>1</isAttr>
+		<isAttr>0</isAttr>
 		<zoffset>0.5</zoffset>
 		<invx>0</invx>
 		<invy>0</invy>
@@ -150,7 +150,7 @@
 				<mass>0.00317368</mass>
 				<rin>0.0652853</rin>
 				<massin>-0.000170679</massin>
-				<damp>0.854227</damp>
+				<damp>1</damp>
 				<distortX>1</distortX>
 			</gravity>
 			<planeForce>
@@ -189,7 +189,7 @@
 				<isActive>1</isActive>
 				<f>1</f>
 				<fmin>1</fmin>
-				<vmax>1</vmax>
+				<vmax>0.146189</vmax>
 				<vmin>0</vmin>
 			</globalForce>
 		</particles>
@@ -232,7 +232,7 @@
 			<insideMode>0</insideMode>
 		</AutoTree>
 		<drawBlob>
-			<isActive>1</isActive>
+			<isActive>0</isActive>
 			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>
