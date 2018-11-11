@@ -20,6 +20,7 @@ music/
 *.mp3
 *.wav
 *.ogg
+*.aif
 *.asd
 **/Iconr
 .splice_folder
