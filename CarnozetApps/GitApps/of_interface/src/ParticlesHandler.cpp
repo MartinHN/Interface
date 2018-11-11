@@ -90,6 +90,7 @@ void Particles::setupData(){
     updatePos.load("","shaders/posUpdate.frag");
     int defaultgrad=0;
     changeGrad(defaultgrad);
+    reset.addListener(this,&Particles::resetOrigins);
 
 }
 void Particles::setup(){
@@ -125,7 +126,8 @@ void Particles::setup(){
     
     
     MYPARAM(timeStep , 1.f,0.f,30.f);
-
+    MYPARAM(timeStepM , 1.f,0.f,1.f);
+    timeStepM.setSerializable(false);
     
     MYPARAM(numParticles , 100000,100,1000000);
     lastnumParticles = numParticles;
@@ -133,12 +135,16 @@ void Particles::setup(){
     //Appearence
     MYPARAM(particleSize, 3.0f,0.f,30.f);
     MYPARAM(alphaColor,255,0,255);
+    MYPARAM(alphaColorM,1.0f,0.0f,1.0f);
+    alphaColorM.setSerializable(false);
     MYPARAM(color, ofVec3f(0,0,1.),ofVec3f(0.),ofVec3f(255.));
     MYPARAM(gradtype , 2,0,3);
     MYPARAM(gradNum,0,0,20);
     MYPARAM(mingrad,0.f,-1.f,1.f);
     MYPARAM(maxgrad,1,-1.f,3.f);
     MYPARAM(map2blob,true,false,true);
+    MYPARAM(reset,false,false,true);
+
 
 #ifdef PMOD
     MYPARAM(origintype,1,0,2);
@@ -199,7 +205,7 @@ void Particles::setup(){
     
     forces.push_back(new Force("spring",true));
     forces[forces.size()-1]->addParameter("k",.030f,-.2f,1.f);
-    forces[forces.size()-1]->addParameter("l0",.010f,0.f,.1f);
+    forces[forces.size()-1]->addParameter("l0",.010f,0.f,.4f);
     forces[forces.size()-1]->addParameter("z",.0f,-.5f,.5f);    
     forces[forces.size()-1]->addParameter("mode",1,0,1);
     forces[forces.size()-1]->addParameter("distortX",1.f,0.f,2.f);
@@ -328,7 +334,7 @@ void Particles::update(int w, int h){
     posPingPong.dst->begin();
     updatePos.begin();  // Previus position
     updatePos.setUniformTexture("velData", velPingPong.src->getTextureReference(), 1);      // Velocity
-    updatePos.setUniform1f("timestep",timeStep*1.0/FPS );
+    updatePos.setUniform1f("timestep",timeStep*timeStepM*1.0/FPS );
     updatePos.setUniform1i("resolution",textureRes);
     
     posPingPong.src->draw(0,0);
@@ -374,7 +380,7 @@ void Particles::draw(int w, int h){
     updateRender.setUniform4f("colorpart",gradtype,color.get()[0],color.get()[1],color.get()[2]);
     updateRender.setUniform2f("gradbounds",(float)mingrad,(float)maxgrad);
 //    updateRender.setUniform3f("mouse",(float)(ofGetMouse().x),(float)(height-mouseY),(float)zdepth/2 + f.mousez);
-    updateRender.setUniform1f("alpha",alphaColor/255.0);
+    updateRender.setUniform1f("alpha",alphaColor*alphaColorM/255.0);
     
     
     
@@ -406,6 +412,13 @@ void Particles::draw(int w, int h){
 
 void Particles::initFbo(){
     initFbo(*dad->scrw,*dad->scrh);
+}
+
+void Particles::resetOrigins(bool & r){
+    if(reset){
+        reset=false;
+        initFbo();
+    }
 }
 
 

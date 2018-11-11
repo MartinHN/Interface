@@ -254,12 +254,13 @@
 		3B361208CD4107E479F04E7B /* NetworkingUtils.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = NetworkingUtils.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/posix/NetworkingUtils.cpp; sourceTree = SOURCE_ROOT; };
 		3CABCA8EA52D11C95F7A1309 /* registration.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = registration.h; path = ../../../addons/ofxKinect/libs/libfreenect/src/registration.h; sourceTree = SOURCE_ROOT; };
 		3DBD37876A11E46E4D7069B3 /* cameras.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = cameras.c; path = ../../../addons/ofxKinect/libs/libfreenect/src/cameras.c; sourceTree = SOURCE_ROOT; };
-		3F45AD5021974740002AFC3E /* kinectExample_withVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kinectExample_withVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F45AD5021974740002AFC3E /* kinectExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kinectExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F45AD5121974741002AFC3E /* kinectExample copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "kinectExample copy-Info.plist"; path = "/Users/Tintamar/Dev/Interface/CarnozetApps/GitApps/kinectExample/kinectExample copy-Info.plist"; sourceTree = "<absolute>"; };
 		3F70423B21908C3600B467C5 /* SyphonNameboundClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyphonNameboundClient.m; path = ../../../addons/ofxSyphon/libs/Syphon/src/SyphonNameboundClient.m; sourceTree = "<group>"; };
 		3F7A689C2191CD7800D7D310 /* Calib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Calib.cpp; sourceTree = "<group>"; };
 		3F7A689D2191CD7800D7D310 /* Calib.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Calib.hpp; sourceTree = "<group>"; };
 		3F7A689F2191D62300D7D310 /* ParamHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParamHelpers.h; sourceTree = "<group>"; };
+		3F9BBEF3219850CE009B54F8 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		444657A12E59D0ED86981498 /* TimerListener.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = TimerListener.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/TimerListener.h; sourceTree = SOURCE_ROOT; };
 		44EF97BDD915E758777A9A8C /* ofxKinect.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxKinect.h; path = ../../../addons/ofxKinect/src/ofxKinect.h; sourceTree = SOURCE_ROOT; };
 		452417865E4BFB10C9CBF8A2 /* internal.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = internal.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/internal.hpp; sourceTree = SOURCE_ROOT; };
@@ -1070,12 +1071,13 @@
 			children = (
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
+				3F9BBEF3219850CE009B54F8 /* PrefixHeader.pch */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
 				E4B69B5B0A3A1756003C02F2 /* kinectExampleDebug.app */,
-				3F45AD5021974740002AFC3E /* kinectExample_withVideo.app */,
+				3F45AD5021974740002AFC3E /* kinectExample.app */,
 				3F45AD5121974741002AFC3E /* kinectExample copy-Info.plist */,
 			);
 			sourceTree = "<group>";
@@ -1192,7 +1194,7 @@
 			);
 			name = kinectExample_withVideo;
 			productName = myOFApp;
-			productReference = 3F45AD5021974740002AFC3E /* kinectExample_withVideo.app */;
+			productReference = 3F45AD5021974740002AFC3E /* kinectExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E4B69B5A0A3A1756003C02F2 /* kinectExample */ = {
@@ -1442,6 +1444,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				ICON = "$(ICON_NAME_DEBUG)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "kinectExample copy-Info.plist";
@@ -1516,7 +1520,7 @@
 					"-mtune=native",
 					"-DUSE_QT",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = kinectExample;
 				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1535,6 +1539,8 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				ICON = "$(ICON_NAME_RELEASE)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "kinectExample copy-Info.plist";
@@ -1609,7 +1615,7 @@
 					"-mtune=native",
 					"-DUSE_QT",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = kinectExample;
 				SDKROOT = macosx10.11;
 				WRAPPER_EXTENSION = app;
 			};

@@ -66,6 +66,7 @@ public:
     
     void registerParam();
     void changeGrad(int & i);
+    void resetOrigins(bool & r);
 
 #ifdef PFBO
     ofFbo finaldraw;
@@ -93,21 +94,21 @@ public:
     ofShader updatePos;
     ofShader updateRender;
 
-    ofParameter<float>      timeStep;
+    ofParameter<float>      timeStep,timeStepM;
 
     ofParameter<int>        numParticles ;
     pingPongBuffer          velPingPong;
     pingPongBuffer          posPingPong;
     
     
-    ofParameter<float>      particleSize;
+    ofParameter<float>      particleSize,alphaColorM;
     ofParameter<int>      alphaColor;
     ofParameter<ofVec3f>    color;
     ofParameter<int>        gradtype;
     ofParameter<float>      mingrad;
     ofParameter<float>      maxgrad;
     ofParameter<int>        gradNum;
-    ofParameter<bool> map2blob;
+    ofParameter<bool> map2blob,reset;
     
     
     int lastnumParticles;
