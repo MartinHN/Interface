@@ -265,7 +265,7 @@
 			<isHidden>0</isHidden>
 		</ColorRuban>
 		<Liner>
-			<isActive>0</isActive>
+			<isActive>1</isActive>
 			<isPiping>0</isPiping>
 			<screenN>0</screenN>
 			<recopy>1</recopy>
