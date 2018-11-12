@@ -7,7 +7,7 @@
 		<rback>255</rback>
 		<gback>255</gback>
 		<bback>255</bback>
-		<alphablur>0</alphablur>
+		<alphablur>255</alphablur>
 		<bloomsize>0</bloomsize>
 		<isGloom>0</isGloom>
 		<gloomSize>0</gloomSize>

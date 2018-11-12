@@ -93,7 +93,7 @@
 			<recopy>1</recopy>
 			<isMapping>1</isMapping>
 			<isMasking>0</isMasking>
-			<timeStep>22.9756</timeStep>
+			<timeStep>25.2551</timeStep>
 			<numParticles>234222</numParticles>
 			<particleSize>3.36735</particleSize>
 			<alphaColor>128</alphaColor>
@@ -103,31 +103,31 @@
 			<mingrad>0</mingrad>
 			<maxgrad>0.912195</maxgrad>
 			<map2blob>1</map2blob>
-			<reset>0</reset>
+			<reset>1</reset>
 			<origintype>0</origintype>
 			<netw>
 				<isActive>1</isActive>
-				<k>0.00388252</k>
+				<k>0</k>
 				<l0>1</l0>
-				<l0max>0</l0max>
-				<z>0.0841316</z>
+				<l0max>5.83923</l0max>
+				<z>0.136193</z>
 				<size>3</size>
 			</netw>
 			<neth>
 				<isActive>1</isActive>
-				<k>0.00388252</k>
+				<k>0</k>
 				<l0>1</l0>
 				<l0max>0</l0max>
-				<z>0.063307</z>
+				<z>0.125781</z>
 				<size>3</size>
 			</neth>
 			<origin>
 				<isActive>1</isActive>
-				<k>0.0160528</k>
-				<z>0.01</z>
-				<freeze>0.142957</freeze>
+				<k>0.0105165</k>
+				<z>0</z>
+				<freeze>0.137776</freeze>
 				<freezemin>0</freezemin>
-				<damp>0.915381</damp>
+				<damp>0.672012</damp>
 				<noiseFreq>4</noiseFreq>
 				<noiseAmp>0</noiseAmp>
 				<noisePhase>0</noisePhase>
@@ -135,26 +135,26 @@
 			</origin>
 			<rotation>
 				<isActive>0</isActive>
-				<attrFamilly>1</attrFamilly>
+				<attrFamilly>0</attrFamilly>
 				<attrZone>0</attrZone>
 				<type>0</type>
-				<r>0.5</r>
-				<speed>0.0121951</speed>
+				<r>0.182424</r>
+				<speed>0.00541442</speed>
 				<orientation>0, 1, 0</orientation>
 			</rotation>
 			<gravity>
-				<isActive>0</isActive>
+				<isActive>1</isActive>
 				<attrFamilly>0</attrFamilly>
 				<attrZone>0</attrZone>
-				<r>0.234486</r>
-				<mass>-0.0002</mass>
-				<rin>0.231883</rin>
-				<massin>-1.86589e-05</massin>
-				<damp>0.741165</damp>
+				<r>0.172012</r>
+				<mass>0.000754894</mass>
+				<rin>0.173967</rin>
+				<massin>-1.24115e-05</massin>
+				<damp>0.962516</damp>
 				<distortX>1</distortX>
 			</gravity>
 			<planeForce>
-				<isActive>1</isActive>
+				<isActive>0</isActive>
 				<k>0.1</k>
 				<z>0.01</z>
 				<freeze>0</freeze>
@@ -165,12 +165,12 @@
 				<noisePhase>0</noisePhase>
 			</planeForce>
 			<spring>
-				<isActive>1</isActive>
+				<isActive>0</isActive>
 				<attrFamilly>0</attrFamilly>
 				<attrZone>0</attrZone>
-				<k>0.217521</k>
-				<l0>0.108455</l0>
-				<z>0.000208259</z>
+				<k>0.0566431</k>
+				<l0>0.0968763</l0>
+				<z>0</z>
 				<mode>0</mode>
 				<distortX>1</distortX>
 			</spring>
@@ -187,9 +187,9 @@
 			</fieldForce>
 			<globalForce>
 				<isActive>1</isActive>
-				<f>0.98009</f>
-				<fmin>1</fmin>
-				<vmax>0.223494</vmax>
+				<f>0.942732</f>
+				<fmin>0.893919</fmin>
+				<vmax>0.2399</vmax>
 				<vmin>0</vmin>
 			</globalForce>
 		</particles>
